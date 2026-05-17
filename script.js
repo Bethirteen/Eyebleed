@@ -1,5 +1,5 @@
-const hoverSound = new Audio("Assets/fnafgroan.mp3");
-const bgMusic = new Audio("Assets/bgaudio.mp3");
+const hoverSound = new Audio("Assets/audio/fnafgroan.mp3");
+const bgMusic = new Audio("Assets/audio/bgaudio.mp3");
 
 hoverSound.preload = "auto";
 bgMusic.preload = "auto";
@@ -100,3 +100,61 @@ function updateCursorPosition() {
   }
   isUpdating = false;
 }
+// ==========================================================================
+// WITNESS ODOMETER ENGINE (Path 3: Unique Device Tracking Gate - Fixed)
+// ==========================================================================
+async function initializeOdometer() {
+  const counterContainer = document.getElementById('witness-counter');
+  if (!counterContainer) return;
+
+  // Selects only the 6 numeric digit slots
+  const digitImages = counterContainer.querySelectorAll('img:not(:first-child)');
+
+  const namespace = 'eyebleed_net';
+  const counterName = 'witnesses';
+  let apiUrl = '';
+
+  // Gatekeeper: Determine whether to increment a new visit or read passively
+  if (!localStorage.getItem('eyebleed_witness_marked')) {
+    // No mark found: Direct path to increment route
+    apiUrl = `https://api.counterapi.dev/v1/${namespace}/${counterName}/up`;
+    localStorage.setItem('eyebleed_witness_marked', 'true');
+  } else {
+    // Mark found: Rigid V1 architecture requires a trailing slash for passive lookup
+    apiUrl = `https://api.counterapi.dev/v1/${namespace}/${counterName}/`;
+  }
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    
+    let count = data.count;
+    if (count === undefined) count = 1;
+
+    // Pad the number string out to your flat 6-digit layout (e.g., 1 -> "000001")
+    const countString = String(count).padStart(6, '0');
+    
+    // Mapping array for your asset filenames
+    const digitWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+
+    // Dynamically update the visual graphic track
+    digitImages.forEach((img, index) => {
+      if (index < countString.length) {
+        const digitChar = countString[index];
+        const digitValue = parseInt(digitChar, 10);
+        
+        if (!isNaN(digitValue)) {
+          const word = digitWords[digitValue];
+          img.src = `Assets/Numbers/${word}.png`; // Target folder path
+          img.alt = digitChar;
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error("Witness ledger connection drop. Preserving canvas baseline.", error);
+  }
+}
+
+// Fire the engine immediately on background load
+document.addEventListener('DOMContentLoaded', initializeOdometer);

@@ -18,7 +18,7 @@ html, body, *, *::before, *::after {
 #custom-cursor {
   width: 64px;        
   height: 64px;
-  background-image: url("Assets/cursor.gif"); 
+  background-image: url("Assets/gifs/cursor.gif"); 
   background-size: contain;
   background-repeat: no-repeat;
   
@@ -265,7 +265,7 @@ nav a.portfolio-link img:hover {
 /* TARGET: Only the numeric digits following the text plate */
 .Viewcounter img:not(:first-child) {
   display: inline-block;
-  height: 100px; /* Kept compact relative to the main headline asset */
+  height: 110px; /* Kept compact relative to the main headline asset */
   width: auto;
   vertical-align: middle;
   margin-right: 1px; /* Ultra-tight spacing strictly between individual digits */
@@ -382,7 +382,7 @@ nav a.portfolio-link img:hover {
   z-index: 4;
   box-sizing: border-box;
   text-align: center;
-  overflow: hidden;
+  overflow: visible; /* Allows content to expand beyond the initial viewport height without being cut off */
   padding-bottom: 10px; /* Gives clean breathing room at the absolute bottom of the canvas */
 
   /* GLOSS SHEEN ENGINE REPLICATION (Direct mirror of your nav styling) */
@@ -487,7 +487,37 @@ html {
     inset 0 0 6px rgba(121, 0, 0, 1);
   
 }
+/* ==========================================================================
+   STATIONARY LOWER RIGHT ART CONTAINER
+   ========================================================================== */
+#corner-art {
+  position: absolute;
+  /* 120px (skeleton height) + 30px (desktop padding offset) = 150px above the container */
+  top: -150px; 
+  right: 30px;  /* Aligns tightly against the right viewport margin wall */
+  z-index: 100; /* Maintains matching plane depth with the music controller */
+  pointer-events: none; /* Ensures mouse clicks pass directly through the element */
+}
 
+#corner-art img {
+  display: block;
+  height: 150px; /* Mirrors desktop skeleton height parameters exactly */
+  width: auto;
+  image-rendering: pixelated; /* Keeps pixel boundaries perfectly sharp */
+}
+
+/* Responsive safety adjustments matching your tablet matrix */
+@media (max-width: 1024px) {
+  #corner-art {
+    /* 65px (tablet skeleton height) + 20px (tablet padding offset) = 85px */
+    top: -85px;
+    right: 20px;
+  }
+  
+  #corner-art img {
+    height: 65px; /* Scales down to mirror the tablet audio controller scale */
+  }
+}
 /* ==========================================================================
          TABLET SAFETY NET (Breakpoints down to 768px)
          ========================================================================== */
