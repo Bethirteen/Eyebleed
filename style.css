@@ -276,7 +276,7 @@ nav a.portfolio-link img:hover {
 .Notebooks {
   position: relative; /* Changed from absolute to keep layout height intact */
   text-align: center;
-  margin: 25vh auto 0 auto; /* Centers horizontally and clears the fixed nav/counter */
+  margin: 35vh auto 0 auto; /* Centers horizontally and clears the fixed nav/counter */
   width: 90%;
   max-width: 1450px;
   height: 80vh;
@@ -444,6 +444,49 @@ nav a.portfolio-link img:hover {
   text-shadow: 0 0 5px rgba(243, 241, 235, 0.4);
 }
 
+/* ==========================================================================
+   CUSTOM GRITTY SCROLLBAR ENGINE
+   ========================================================================== */
+
+/* 1. MODERN STANDARD (For Firefox compatibility) */
+html {
+  scrollbar-width: auto; /* Options: auto, thin */
+  scrollbar-color: rgb(243, 241, 235) rgb(16, 16, 16); /* thumb color (crimson) followed by track color (charcoal) */
+}
+
+/* 2. WEBKIT pseudo-elements (For Chrome, Safari, Edge, and iOS/Android viewports) */
+
+/* The overall scrollbar track width */
+::-webkit-scrollbar {
+  width: 14px; /* Gives a solid, heavy vertical track presence */
+}
+
+/* The background pipeline underneath the slider */
+::-webkit-scrollbar-track {
+  background-color: #101010; /* Matches your navbar background texture */
+  border-left: 2px solid #000000; /* Separates the viewport canvas from the track with a hard line */
+}
+
+/* The active slider piece that moves as you scroll */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(243, 241, 235); /* Crimson bleed accent color */
+  border-radius: 0px; /* Hard-coded 0px to maintain blocky, pixelated edges */
+  border: 2px solid #000000; /* Wraps the red thumb in a heavy black border line */
+  /* THE BLEED GLOW ENGINE */
+  /* Outset shadow casts a 10px crimson aura; inset shadow makes the inner core hum */
+  box-shadow: 
+    0 0 10px rgba(255, 51, 51, 0.8), 
+    inset 0 0 6px rgba(255, 51, 51, 1);
+}
+
+/* Visual state when hovering over the slider container */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(121, 0, 0) rgb(243, 241, 235); /* Darkens to a dried-blood tone on engagement */
+  box-shadow: 
+    0 0 14px rgba(255, 51, 51, 1), 
+    inset 0 0 6px rgba(121, 0, 0, 1);
+  
+}
 
 /* ==========================================================================
          TABLET SAFETY NET (Breakpoints down to 768px)
