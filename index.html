@@ -12,11 +12,7 @@
     <div id="landing-view">
       <div class="container">
         <div id="CardTitle">
-          <img
-            src="Assets/logo.png"
-            alt="Eyebleed Logo"
-            style="width: 30%; height: 30%"
-          />
+          <img id="landingLogo" src="Assets/logo.png" alt="Eyebleed Logo" />
         </div>
         <div id="CardBody">
           <p>
@@ -56,7 +52,14 @@
 
     <div id="main-view" class="hidden">
       <nav>
-        <a href="#" onclick="window.scrollTo(0, 0); return false;" class="logo-link">
+        <a
+          href="#"
+          onclick="
+            window.scrollTo(0, 0);
+            return false;
+          "
+          class="logo-link"
+        >
           <img src="Assets/logo.png" alt="Eyebleed Logo" />
         </a>
         <a
@@ -81,53 +84,74 @@
 
       <div class="Viewcounter" id="witness-counter">
         <img src="Assets/Witnesses.png" alt="Total Witnesses:" />
-        <img src="Assets/Numbers/five.png" alt="0" />
-        <img src="Assets/Numbers/seven.png" alt="0" />
-        <img src="Assets/Numbers/six.png" alt="0" />
         <img src="Assets/Numbers/zero.png" alt="0" />
         <img src="Assets/Numbers/zero.png" alt="0" />
-        <img src="Assets/Numbers/one.png" alt="1" />
+        <img src="Assets/Numbers/zero.png" alt="0" />
+        <img src="Assets/Numbers/zero.png" alt="0" />
+        <img src="Assets/Numbers/zero.png" alt="0" />
+        <img src="Assets/Numbers/zero.png" alt="1" />
       </div>
 
       <div class="Notebooks" id="notebooks">
         <img
           src="Assets/Notebooks.png"
           alt="Notebooks header"
+          id="notebooks-main-header"
           style="position: relative; height: 25%; top: 15%"
         />
 
         <div class="notebook-links-grid">
-          <a href="#volume-1">#Notebook_00</a>
-          <a href="#volume-2">#Notebook_01</a>
-          <a href="#volume-3">#Notebook_02</a>
-          <a href="#volume-4">#Notebook_03</a>
-          <a href="#volume-5">#Notebook_04</a>
-          <a href="#volume-6">#Notebook_05</a>
+          <a href="#volume-0" class="volume-trigger" data-volume="00"
+            >#Notebook_00</a
+          >
+          <a href="#volume-1" class="volume-trigger" data-volume="01"
+            >#Notebook_01</a
+          >
+          <a href="#volume-2" class="volume-trigger" data-volume="02"
+            >#Notebook_02</a
+          >
+          <a href="#volume-3" class="volume-trigger" data-volume="03"
+            >#Notebook_03</a
+          >
+          <a href="#volume-4" class="volume-trigger" data-volume="04"
+            >#Notebook_04</a
+          >
+          <a href="#volume-5" class="volume-trigger" data-volume="05"
+            >#Notebook_05</a
+          >
+        </div>
+
+        <div id="notebook-archive-stage" class="hidden">
+         
+
+          <div id="notebook-pages-array"></div>
+           <button type="button" id="close-archive-btn">Return</button>
         </div>
       </div>
       <div class="About" id="about">
         <div id="corner-art">
-        <img src="Assets/gifs/skull.gif" alt="Ambient Node" />
-      </div>
+          <img src="Assets/gifs/skull.gif" alt="Ambient Node" />
+        </div>
         <img src="Assets/About.png" alt="About header" class="about-header" />
 
         <div class="about-content">
           <p>
             Eyebleed.NET is a digital art project by the artist, B13, designed
-            to evoke internal discomfort through drawings scanned
-            and uploaded from the artist's real-world notebooks. The intended
-            discomfort isn't meant to being a punishment inflicted on the
-            viewer, but more of a form of shared intimacy between viewer and
-            artist.
+            to evoke internal discomfort through drawings scanned and uploaded
+            from the artist's real-world notebooks. The intended discomfort
+            isn't meant to being a punishment inflicted on the viewer, but more
+            of a form of shared intimacy between viewer and artist.
           </p>
-          <p class="manifesto-highlight">
-            "Life is brutal"
-          </p>
+          <p class="manifesto-highlight">"Life is brutal"</p>
         </div>
       </div>
 
       <div id="music-toggle" class="music-controller">
-        <img id="gif-icon" src="Assets/gifs/skeleton.gif" alt="Audio Control Node" />
+        <img
+          id="gif-icon"
+          src="Assets/gifs/skeleton.gif"
+          alt="Audio Control Node"
+        />
       </div>
     </div>
 

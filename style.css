@@ -73,6 +73,10 @@ body {
   margin-top: 25px;
   text-align: center;
 }
+#landingLogo {
+  width: 40%;
+   height: 30%;
+}
 #CardBody {
   font-size: 25px;
   line-height: 1.5;
@@ -255,7 +259,7 @@ nav a.portfolio-link img:hover {
 /* TARGET: The primary "witness" text plate asset specifically */
 .Viewcounter img:first-child {
   display: inline-block;
-  height: 230px; /* Increased size to make the text headline dominant */
+  height: 180px; /* Increased size to make the text headline dominant */
   width: auto;
   vertical-align: middle;
   margin-right: 12px; /* Distinct layout separation before the number sequence begins */
@@ -265,7 +269,7 @@ nav a.portfolio-link img:hover {
 /* TARGET: Only the numeric digits following the text plate */
 .Viewcounter img:not(:first-child) {
   display: inline-block;
-  height: 110px; /* Kept compact relative to the main headline asset */
+  height: 80px; /* Kept compact relative to the main headline asset */
   width: auto;
   vertical-align: middle;
   margin-right: 1px; /* Ultra-tight spacing strictly between individual digits */
@@ -274,19 +278,26 @@ nav a.portfolio-link img:hover {
 }
 /* VISUAL CONTAINER LAYER */
 .Notebooks {
-  position: relative; /* Changed from absolute to keep layout height intact */
+  position: relative; 
   text-align: center;
   margin: 35vh auto 0 auto; /* Centers horizontally and clears the fixed nav/counter */
   width: 90%;
   max-width: 1450px;
   height: 80vh;
 
-  background-image: url("Assets/tapePaper.png");
+  background-image: url("Assets/tapePaper.png"); /* */
   background-size: cover;
   background-position: center;
 
   z-index: 5;
   box-sizing: border-box;
+
+  /* THE HEAVY KINETIC ENGINE: Noticeably slow, mechanical expansion curves */
+  transition: 
+    margin 3.05s cubic-bezier(0.16, 1, 0.3, 1), 
+    height 1.05s cubic-bezier(0.16, 1, 0.3, 1), 
+    max-width 1.05s cubic-bezier(0.16, 1, 0.3, 1), 
+    padding 1.05s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================
@@ -501,7 +512,7 @@ html {
 
 #corner-art img {
   display: block;
-  height: 150px; /* Mirrors desktop skeleton height parameters exactly */
+  height: 140px; /* Mirrors desktop skeleton height parameters exactly */
   width: auto;
   image-rendering: pixelated; /* Keeps pixel boundaries perfectly sharp */
 }
@@ -569,6 +580,10 @@ html {
          MOBILE SAFETY BREAKDOWN (Screens down to 480px)
          ========================================================================== */
   @media (max-width: 480px) {
+    #landingLogo {
+      width: 20%;
+   height: 15%;
+    }
     .Viewcounter {
       top: 82px; /* Tucks it tightly right beneath your 70px navigation bar */
     }
@@ -689,4 +704,123 @@ html {
   100% {
     transform: translate(0, 0);
   }
+}
+/* ==========================================================================
+   MORPHING NOTEBOOK ARCHIVE ENGINE (Asymmetric Grid & Bottom Return)
+   ========================================================================== */
+
+/* 1. SELECTION DISSOLVE */
+.archive-engaged .notebook-links-grid {
+  display: none !important;
+}
+
+/* 2. THE HIGH-SPEED ESCAPE JUNCTION */
+.archive-engaged .Viewcounter {
+  animation: counter-drag-escape 0.44s forwards cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* 3. TRANSFORMS THE MASSIVE HOUSING FRAME */
+.archive-engaged .Notebooks {
+  margin: 110px auto 0 auto; /* Glides smoothly up into the vacated header territory */
+  height: 85vh;             /* Expands downward to handle the layout grid depth */
+  max-width: 1600px;        
+  padding: 40px;
+}
+
+/* 4. CONTENT ARRAY SUB-STAGE LAYOUT */
+#notebook-archive-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes the grid upward and forces the button to the bottom */
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* THE ASYMMETRIC INNER PAGE LINKS GRID */
+/* Replicates the exact column/row spacing configuration of your volume grid selection menu */
+#notebook-pages-array {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 25px 40px;
+  width: 85%;
+  max-width: 1100px;
+  height: 50%;
+  margin: 5% auto 0 auto; /* Visually balances the gap below your active header image */
+  box-sizing: border-box;
+}
+
+#notebook-pages-array a {
+  text-decoration: none;
+  color: #1a1a1a; /* */
+  font-size: 22px; /* Matches the text sizing of your primary notebook titles */
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Precise replication of your structural rotational physics */
+#notebook-pages-array a:nth-child(1) { transform: rotate(-1.5deg) translate(-10px, 4px); }
+#notebook-pages-array a:nth-child(2) { transform: rotate(1deg) translate(8px, -6px); }
+#notebook-pages-array a:nth-child(3) { transform: rotate(-0.8deg) translate(12px, 8px); }
+#notebook-pages-array a:nth-child(4) { transform: rotate(1.8deg) translate(-6px, -2px); }
+#notebook-pages-array a:nth-child(5) { transform: rotate(-2deg) translate(-4px, 10px); }
+#notebook-pages-array a:nth-child(6) { transform: rotate(1.2deg) translate(14px, 2px); }
+
+/* Interaction state */
+#notebook-pages-array a:hover {
+  animation: jitter 0.1s infinite; /* */
+  transform: scale(1.03) rotate(0deg) translate(0, 0);
+  z-index: 6;
+}
+
+/* 5. COPY OF LANDING BUTTON DESIGN (#continue) */
+#close-archive-btn {
+  display: block;
+  margin: -220px auto 220px auto; /* Centered perfectly at the container floor layout path */
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  will-change: transform;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.4s ease;
+  border-radius: 0;
+  border: 1px solid #000;
+  background-color: #fff;
+  color: #000000;
+  font-family: inherit; /* Ensures typographic tracking matches your global baseline */
+}
+
+#close-archive-btn:hover {
+  background-color: #f0f0f0; /* Matches landing panel button hover color */
+  animation: jitter 0.1s infinite; /* */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 6. CURSOR PROJECTION SUB-ENGINE */
+#custom-cursor.thumbnail-active {
+  width: 240px;  
+  height: 240px; 
+  background-color: rgba(16, 16, 16, 0.96); 
+  border: 2px solid #000000; 
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; 
+}
+
+/* ==========================================================================
+   VIOLENT OVERHEAD EXIT DRAG MATRIX
+   ========================================================================== */
+@keyframes counter-drag-escape {
+  0% { top: 100px; transform: translateX(-50%) rotate(0deg); }
+  20% { top: 70px; transform: translateX(-54%) rotate(-3deg); }
+  45% { top: 30px; transform: translateX(-44%) rotate(4deg); }
+  70% { top: -30px; transform: translateX(-53%) rotate(-2deg); }
+  100% { top: -280px; transform: translateX(-50%) rotate(0deg); }
 }

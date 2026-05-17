@@ -1,9 +1,16 @@
-const hoverSound = new Audio("Assets/audio/fnafgroan.mp3");
-const bgMusic = new Audio("Assets/audio/bgaudio.mp3");
+const hoverSound = new Audio("Assets/audio/fnafgroan.mp3"); //
+const bgMusic = new Audio("Assets/audio/bgaudio.mp3"); //
+// NEW: Define the path to your notebook selection sound asset
+const notebookClickSound = new Audio("Assets/audio/creak.mp3"); 
 
-hoverSound.preload = "auto";
-bgMusic.preload = "auto";
-bgMusic.loop = true;
+hoverSound.preload = "auto"; //
+bgMusic.preload = "auto"; //
+bgMusic.loop = true; //
+// NEW: Preload the click sound so it triggers instantly without lagging the layout shift
+notebookClickSound.preload = "auto"
+
+// NEW: Calibrate the audio output level (0.3 = 30% volume baseline)
+notebookClickSound.volume = 0.8;
 
 const continueButton = document.getElementById("continue");
 const landingView = document.getElementById("landing-view");
@@ -158,3 +165,101 @@ async function initializeOdometer() {
 
 // Fire the engine immediately on background load
 document.addEventListener('DOMContentLoaded', initializeOdometer);
+// ==========================================================================
+// NOTEBOOK ARCHIVE DISPLAY INTERFACE ENGINE
+// ==========================================================================
+
+// Catalog Ledger: Map out your individual scanned sketch file paths here
+const notebookCatalog = {
+  "00": [
+    { title: "Page_01: Structural Bone Realism", img: "Assets/Notebook_00/page1.jpeg" },
+    { title: "Page_02: Internal Discomfort Study", img: "Assets/Notebook_00/page2.png" },
+    { title: "Page_03: Fragmented Outline Study", img: "Assets/Notebook_00/page3.png" }
+  ],
+  "01": [
+    { title: "Page_01: Visceral Ink Pass", img: "Assets/Notebook_01/page1.png" },
+    { title: "Page_02: Observed Reality Deficit", img: "Assets/Notebook_01/page2.png" }
+  ],
+  "02": [], // Add entry dictionaries here as you expand your digital archives
+  "03": [],
+  "04": [],
+  "05": []
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const mainView = document.getElementById("main-view");
+  const archiveStage = document.getElementById("notebook-archive-stage");
+  const pagesArrayContainer = document.getElementById("notebook-pages-array");
+  const closeBtn = document.getElementById("close-archive-btn");
+  const globalCursorElement = document.getElementById("custom-cursor");
+  const mainHeaderImg = document.getElementById("notebooks-main-header");
+
+  if (!mainView || !archiveStage || !pagesArrayContainer || !closeBtn || !globalCursorElement || !mainHeaderImg) return;
+
+// 1. VOLUME LINK ENGAGEMENT PROCESSOR
+  document.querySelectorAll(".volume-trigger").forEach(trigger => {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault(); // Stop native anchor viewport snapping
+      
+      // NEW: Snap the audio playback timeline back to 0 and fire the sound immediately
+      notebookClickSound.currentTime = 0;
+      notebookClickSound.play().catch((err) => console.error("Audio playback blocked:", err));
+
+      const volId = trigger.getAttribute("data-volume"); // Pulls "00", "01", etc.
+      const pages = notebookCatalog[volId] || []; //
+      
+      // DYNAMIC GRAPHIC MUTATION: Swap header text banner
+      mainHeaderImg.src = `Assets/Notebook${volId}.png`;
+      mainHeaderImg.alt = `Notebook ${volId} Header`;
+ 
+      // Clear out the previous index array entries from the tray
+      pagesArrayContainer.innerHTML = "";
+
+      if (pages.length === 0) {
+        pagesArrayContainer.innerHTML = "<p style='color:#1a1a1a; font-style:italic;'>Notebook currently vacant...</p>";
+      } else {
+        // Build out the minimalist text line structure
+        pages.forEach(page => {
+          const pageLink = document.createElement("a");
+          pageLink.href = "#";
+          pageLink.textContent = page.title;
+          
+          // CURSOR TRANSFORMATION MODE (Option 1): Projected specimen slide overrides pointer
+          pageLink.addEventListener("mouseenter", () => {
+            globalCursorElement.style.backgroundImage = `url("${page.img}")`;
+            globalCursorElement.classList.add("thumbnail-active");
+          });
+          
+          // RECOVERY ROUTINE: Return standard animated cursor tracking to space
+          pageLink.addEventListener("mouseleave", () => {
+            globalCursorElement.style.backgroundImage = 'url("Assets/gifs/cursor.gif")'; //
+            globalCursorElement.classList.remove("thumbnail-active");
+          });
+
+          // Block clicking jumps on active text lists
+          pageLink.addEventListener("click", (el) => el.preventDefault());
+
+          pagesArrayContainer.appendChild(pageLink);
+        });
+      }
+
+      // Lock morphing animation states into action
+      mainView.classList.add("archive-engaged");
+      archiveStage.classList.remove("hidden");
+    });
+  });
+
+  // 2. BACK BUTTON RESET MECHANISM: Retract views and restore baseline gallery flow
+  closeBtn.addEventListener("click", () => {
+    mainView.classList.remove("archive-engaged");
+    archiveStage.classList.add("hidden");
+    
+    // RESTORE LAYOUT HEADLINE: Slide standard global heading graphic back into position
+    mainHeaderImg.src = "Assets/Notebooks.png";
+    mainHeaderImg.alt = "Notebooks header";
+    
+    // Safety drop-off reset to guarantee cursor design parameters clear safely
+    globalCursorElement.style.backgroundImage = 'url("Assets/gifs/cursor.gif")'; //
+    globalCursorElement.classList.remove("thumbnail-active");
+  });
+});
