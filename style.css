@@ -1,0 +1,511 @@
+html,
+body {
+  overscroll-behavior: none; /* Hard-locks the viewport frame so scrolling cannot pull away and leak the background */
+}
+
+body {
+  background-image: url("Assets/output.webp");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 15% auto;
+  image-rendering: pixelated;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+         LANDING VIEW STYLES
+         ========================================================================== */
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("Assets/paper.png");
+  background-size: cover;
+  background-position: center;
+  padding: 24px;
+  width: 90%;
+  max-width: 900px;
+  box-sizing: border-box;
+  height: fit-content;
+  color: #000000;
+}
+#CardTitle {
+  margin-top: 25px;
+  text-align: center;
+}
+#CardBody {
+  font-size: 25px;
+  line-height: 1.5;
+  text-align: center;
+  padding: 20px;
+}
+#continue {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  will-change: transform;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.4s ease;
+  border-radius: 0;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+#continue:hover {
+  background-color: #f0f0f0;
+  animation: jitter 0.1s infinite;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+#CardTitle img {
+  display: inline-block;
+  will-change: transform;
+  transition: transform 0.1s ease;
+}
+#CardTitle img:hover {
+  animation: jitter 0.1s infinite;
+}
+
+/* ==========================================================================
+         MAIN VIEW STYLES
+         ========================================================================== */
+nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 1000;
+  box-sizing: border-box;
+  border-bottom: 2px solid #000000;
+
+  display: grid;
+  grid-template-columns: auto repeat(3, 160px) 1fr;
+  grid-template-rows: 70px;
+  align-items: stretch;
+  padding: 0 0 0 30px;
+
+  /* GLOSS SHEEN ENGINE */
+  background-color: #101010;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 20%,
+    transparent 80%
+  );
+}
+
+/* CRT Scanline Overlay Layer */
+nav::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.25) 50%, transparent 50%);
+  background-size: 100% 4px;
+  z-index: 13;
+  pointer-events: none;
+}
+
+nav img {
+  display: inline-block;
+  height: 110px;
+  width: auto;
+  margin-right: 40px;
+  position: relative;
+  top: 2px;
+  z-index: 12;
+  align-self: center;
+  will-change: transform;
+  transition: transform 0.1s ease;
+}
+nav img:hover {
+  animation: jitter 0.1s infinite;
+}
+
+/* WALLED PSEUDO-GRID CELLS */
+nav a {
+  text-decoration: none;
+  color: rgb(243, 241, 235);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-shadow: 0 0 5px rgba(243, 241, 235, 0.4);
+  background-color: transparent;
+  border-right: 3px solid #000000;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+nav a:first-of-type {
+  border-left: 3px solid #000000;
+}
+
+nav a:hover {
+  background-color: #000000;
+}
+
+nav a:hover span {
+  display: inline-block;
+  will-change: transform;
+  animation: jitter 0.1s infinite;
+}
+
+nav a:active {
+  background-color: #000000;
+  color: rgb(121, 0, 0);
+}
+
+/* FAR LEFT LOGO LINK RESET */
+nav a.logo-link {
+  border: none !important;
+  background-color: transparent !important;
+  display: inline-block;
+  text-shadow: none !important;
+}
+
+nav a.logo-link:hover {
+  background-color: transparent !important;
+}
+
+/* Maintenance: Ensures the "Home" cell keeps its outer left border wall now that it follows the logo link */
+nav a.logo-link + a {
+  border-left: 3px solid #000000;
+}
+
+/* FAR RIGHT PORTFOLIO LINK CONFIGURATION */
+nav a.portfolio-link {
+  grid-column: 5;
+  justify-self: end;
+  padding: 0 30px 0 0;
+  border-right: none;
+}
+nav a.portfolio-link:hover {
+  background-color: transparent; /* Bypasses the text cell solid fill block */
+}
+nav a.portfolio-link img {
+  height: 70px; /* Sized layout cleanly inside the 70px track height */
+  width: auto;
+  position: static; /* Neutralizes the primary logo overflow values */
+  margin-right: 0;
+  image-rendering: pixelated;
+}
+nav a.portfolio-link img:hover {
+  animation: jitter 0.1s infinite;
+}
+
+/* SCOREBOARD CONTAINER LAYOUT */
+.Viewcounter {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0; /* Clear global gap to force tight digit packing */
+}
+
+/* TARGET: The primary "witness" text plate asset specifically */
+.Viewcounter img:first-child {
+  display: inline-block;
+  height: 230px; /* Increased size to make the text headline dominant */
+  width: auto;
+  vertical-align: middle;
+  margin-right: 12px; /* Distinct layout separation before the number sequence begins */
+}
+
+/* TARGET: Only the numeric digits following the text plate */
+.Viewcounter img:not(:first-child) {
+  display: inline-block;
+  height: 100px; /* Kept compact relative to the main headline asset */
+  width: auto;
+  vertical-align: middle;
+  margin-right: 1px; /* Ultra-tight spacing strictly between individual digits */
+  margin-top: 2%; /* Slight vertical nudge to visually center the digits with the text plate */
+}
+/* VISUAL CONTAINER LAYER */
+.Notebooks {
+  position: absolute;
+  text-align: center;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1450px;
+  height: 80vh;
+
+  background-image: url("Assets/tapePaper.png");
+  background-size: cover;
+  background-position: center;
+
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+         NOTEBOOK ARCHIVE GRID STYLES
+         ========================================================================== */
+.notebook-links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 25px 40px;
+  width: 85%;
+  max-width: 1100px;
+  height: 50%;
+  margin: 9% auto 0 auto;
+  box-sizing: border-box;
+}
+
+.notebook-links-grid a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* TASTEFUL ASYMMETRIC MISALIGNMENT MATRIX */
+.notebook-links-grid a:nth-child(1) {
+  transform: rotate(-1.5deg) translate(-10px, 4px);
+}
+.notebook-links-grid a:nth-child(2) {
+  transform: rotate(1deg) translate(8px, -6px);
+}
+.notebook-links-grid a:nth-child(3) {
+  transform: rotate(-0.8deg) translate(12px, 8px);
+}
+.notebook-links-grid a:nth-child(4) {
+  transform: rotate(1.8deg) translate(-6px, -2px);
+}
+.notebook-links-grid a:nth-child(5) {
+  transform: rotate(-2deg) translate(-4px, 10px);
+}
+.notebook-links-grid a:nth-child(6) {
+  transform: rotate(1.2deg) translate(14px, 2px);
+}
+
+/* Interaction States */
+.notebook-links-grid a:hover {
+  animation: jitter 0.1s infinite;
+  transform: scale(1.03) rotate(0deg) translate(0, 0);
+  z-index: 6;
+}
+
+/* ==========================================================================
+         LOWER LEFT AUDIO INTERFACE ENGINE
+         ========================================================================== */
+.music-controller {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 100;
+  cursor: pointer;
+}
+.music-controller img {
+  display: block;
+  height: 120px;
+  width: auto;
+  image-rendering: pixelated;
+  transition:
+    opacity 0.2s ease,
+    filter 0.2s ease;
+}
+.music-controller img:hover {
+  animation: jitter 0.1s infinite;
+}
+.music-muted {
+  opacity: 0.35 !important;
+  filter: grayscale(100%) contrast(120%);
+}
+/* ==========================================================================
+         ABOUT SECTION STYLES (Viewport-filling Engine)
+         ========================================================================== */
+.About {
+  position: absolute;
+  top: 135vh; /* Flips down exactly one full viewport length below the main workspace */
+  left: 0;
+  width: 100%;
+  /* Forces the box to capture the entire viewport area */
+  z-index: 4;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+
+  /* GLOSS SHEEN ENGINE REPLICATION (Direct mirror of your nav styling) */
+  background-color: #101010;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 20%,
+    transparent 80%
+  );
+}
+
+/* CRT Scanline Overlay Layer Replication */
+.About::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.25) 50%, transparent 50%);
+  background-size: 100% 4px;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Title Asset Placement (Locked to mirror notebook dimensions perfectly) */
+.About .about-header {
+  position: relative;
+  display: inline-block;
+  height: 20vh; /* Perfectly matches the 25% height of the notebook header */
+  margin-top: 1vh; /* Perfectly matches the 12.5% top offset of the notebook header */
+  width: auto;
+  z-index: 5;
+  image-rendering: pixelated;
+}
+/* About Content Text Layout Engine */
+.About .about-content {
+  position: relative;
+  margin: 2vh auto 0 auto; /* Standardized layout gap that forces text to sit safely below the header image */
+  width: 85%;
+  max-width: 850px;
+  color: rgb(243, 241, 235); /* Soft white to match your nav links */
+  font-size: 20px;
+  line-height: 1.6;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 5;
+  text-shadow: 0 0 5px rgba(243, 241, 235, 0.4);
+}
+
+/* Distinct highlight styling for quotes or pull-text inside the description */
+.About .about-content .manifesto-highlight {
+  margin-top: 30px;
+  font-style: italic;
+  color: #ff3333; /* Crimson bleed accent */
+  font-size: 18px;
+  text-shadow: 0 0 5px rgba(243, 241, 235, 0.4);
+}
+/* ==========================================================================
+         TABLET SAFETY NET (Breakpoints down to 768px)
+         ========================================================================== */
+@media (max-width: 1024px) {
+  #CardBody {
+    font-size: 22px;
+  }
+  nav {
+    padding-left: 15px;
+    grid-template-columns: auto repeat(3, 120px) 1fr;
+  }
+  nav img {
+    margin-right: 20px;
+  }
+  nav a {
+    font-size: 16px;
+  }
+  nav a.portfolio-link {
+    padding-right: 15px;
+  }
+  .notebook-links-grid {
+    width: 95%;
+    gap: 15px 20px;
+  }
+  .notebook-links-grid a {
+    font-size: 18px;
+    text-decoration: underline;
+  }
+  .music-controller {
+    bottom: 20px;
+    left: 20px;
+  }
+  .music-controller img {
+    width: 65px;
+  }
+  /* Scale scoreboard components for tablets */
+  .Viewcounter {
+    top: 92px; /* Pulls it up slightly as the canvas tightens */
+  }
+  .Viewcounter img:first-child {
+    height: 22px; /* Scales down from 28px */
+    margin-right: 8px;
+  }
+  .Viewcounter img:not(:first-child) {
+    height: 14px; /* Scales down from 18px */
+  }
+
+  /* ==========================================================================
+         MOBILE SAFETY BREAKDOWN (Screens down to 480px)
+         ========================================================================== */
+  @media (max-width: 480px) {
+    .Viewcounter {
+      top: 82px; /* Tucks it tightly right beneath your 70px navigation bar */
+    }
+    .Viewcounter img:first-child {
+      height: 16px; /* Shrinks the primary text asset to save viewport space */
+      margin-right: 4px;
+    }
+    .Viewcounter img:not(:first-child) {
+      height: 11px; /* Packs the micro-digits tightly together */
+      margin-right: 0px;
+    }
+  }
+}
+
+/* Global Shared Keyframes */
+@keyframes jitter {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-6px, -5px);
+  }
+  20% {
+    transform: translate(5px, -6px);
+  }
+  30% {
+    transform: translate(-5px, 6px);
+  }
+  40% {
+    transform: translate(6px, -4px);
+  }
+  50% {
+    transform: translate(-4px, 5px);
+  }
+  60% {
+    transform: translate(4px, -6px);
+  }
+  70% {
+    transform: translate(-6px, 4px);
+  }
+  80% {
+    transform: translate(5px, 5px);
+  }
+  90% {
+    transform: translate(-5px, -4px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
