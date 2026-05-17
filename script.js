@@ -78,3 +78,25 @@ window.addEventListener('scroll', () => {
     musicController.style.bottom = `${offset}px`;
   }
 });
+const customCursor = document.getElementById('custom-cursor');
+let mouseX = 0;
+let mouseY = 0;
+let isUpdating = false;
+
+window.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  if (!isUpdating) {
+    isUpdating = true;
+    requestAnimationFrame(updateCursorPosition);
+  }
+});
+
+function updateCursorPosition() {
+  if (customCursor) {
+    customCursor.style.left = `${mouseX}px`;
+    customCursor.style.top = `${mouseY}px`;
+  }
+  isUpdating = false;
+}

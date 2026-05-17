@@ -1,3 +1,37 @@
+html, body {
+  min-height: 100vh; /* Establishes a minimum of full screen height, but allows infinite growth */
+  height: auto;      /* Unlocks the rigid 100% ceiling so it expands with scrolled content */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* FORCE THE TRANSPARENT FILE EVERYWHERE TO TRAP THE DEFAULT ARROW */
+html, body, *, *::before, *::after {
+  cursor: url("Assets/transparent.png"), none !important;
+}
+/* 3. YOUR CUSTOM ANIMATED POINTER LAYERING */
+#custom-cursor {
+  width: 64px;        
+  height: 64px;
+  background-image: url("Assets/cursor.gif"); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+  position: fixed;     
+  top: 0;
+  left: 0;
+  pointer-events: none; 
+  z-index: 99999;      
+  
+  image-rendering: pixelated; 
+  transform: translate(-50%, -50%); 
+}
+
 html,
 body {
   overscroll-behavior: none; /* Hard-locks the viewport frame so scrolling cannot pull away and leak the background */
@@ -225,6 +259,7 @@ nav a.portfolio-link img:hover {
   width: auto;
   vertical-align: middle;
   margin-right: 12px; /* Distinct layout separation before the number sequence begins */
+  image-rendering: pixelated;
 }
 
 /* TARGET: Only the numeric digits following the text plate */
@@ -235,14 +270,13 @@ nav a.portfolio-link img:hover {
   vertical-align: middle;
   margin-right: 1px; /* Ultra-tight spacing strictly between individual digits */
   margin-top: 2%; /* Slight vertical nudge to visually center the digits with the text plate */
+  image-rendering: pixelated;
 }
 /* VISUAL CONTAINER LAYER */
 .Notebooks {
-  position: absolute;
+  position: relative; /* Changed from absolute to keep layout height intact */
   text-align: center;
-  top: 40%;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 25vh auto 0 auto; /* Centers horizontally and clears the fixed nav/counter */
   width: 90%;
   max-width: 1450px;
   height: 80vh;
@@ -340,8 +374,8 @@ nav a.portfolio-link img:hover {
          ABOUT SECTION STYLES (Viewport-filling Engine)
          ========================================================================== */
 .About {
-  position: absolute;
-  top: 135vh; /* Flips down exactly one full viewport length below the main workspace */
+  position: relative; /* Changed from absolute to prevent structural height collapse */
+  margin-top: 15vh; /* Replaces the hardcoded top: 135vh coordinate line */
   left: 0;
   width: 100%;
   /* Forces the box to capture the entire viewport area */
@@ -349,6 +383,7 @@ nav a.portfolio-link img:hover {
   box-sizing: border-box;
   text-align: center;
   overflow: hidden;
+  padding-bottom: 10px; /* Gives clean breathing room at the absolute bottom of the canvas */
 
   /* GLOSS SHEEN ENGINE REPLICATION (Direct mirror of your nav styling) */
   background-color: #101010;
@@ -408,6 +443,8 @@ nav a.portfolio-link img:hover {
   font-size: 18px;
   text-shadow: 0 0 5px rgba(243, 241, 235, 0.4);
 }
+
+
 /* ==========================================================================
          TABLET SAFETY NET (Breakpoints down to 768px)
          ========================================================================== */
@@ -495,10 +532,12 @@ nav a.portfolio-link img:hover {
     text-align: center;
   }
 
-  nav img {
-    height: 70px; /* Scales down the logo asset so it doesn't swallow the mobile viewport */
+ nav img {
+    height: 95px; /* Restores prominent presence on mobile displays like the iPhone XR */
+    width: auto;
     margin-right: 0;
     top: 0;
+    image-rendering: pixelated; /* Keeps the edges razor-sharp when scaled */
   }
 
   /* Converts grid links into clean, stackable button rows */
