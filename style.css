@@ -473,6 +473,75 @@ nav a.portfolio-link img:hover {
   }
 }
 
+/* ==========================================================================
+   MOBILE RESPONSIVE OVERRIDE ENGINE (Activates on screens <= 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  
+  /* 1. VIEWPORT ADJUSTMENTS */
+  html, body {
+    overflow-x: hidden; /* Hard-stops horizontal layout spilling and side-scrolling */
+  }
+
+  /* 2. NAVBAR RE-ARCHITECTURE */
+  nav {
+    flex-direction: column; /* Switches from a wide horizontal row to a vertical stack */
+    height: auto !important; /* Releases the fixed desktop height constraints */
+    background-color: #000000;
+  }
+
+  nav a.logo-link {
+    margin: 15px 0;
+    text-align: center;
+  }
+
+  nav img {
+    height: 70px; /* Scales down the logo asset so it doesn't swallow the mobile viewport */
+    margin-right: 0;
+    top: 0;
+  }
+
+  /* Converts grid links into clean, stackable button rows */
+  nav a {
+    width: 100% !important;
+    height: 50px !important;
+    font-size: 16px;
+    border-right: none !important; /* Strips desktop vertical dividers */
+    border-bottom: 2px solid #222222; /* Applies flat, low-contrast floor lines */
+  }
+
+  nav a.logo-link + a {
+    border-left: none !important; /* Cleans up desktop maintenance borders */
+  }
+
+  /* 3. MAIN WORKSPACE SCALING */
+  /* If your main interactive area/grid uses strict widths, we loosen them here */
+  #main-view {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* 4. THE ABOUT SECTION TRACKING RESET */
+  .About {
+    position: relative; /* Switches from absolute coordinates to standard document flow */
+    top: auto;          /* Unlocks it from the hardcoded desktop 135vh line */
+    margin-top: 10vh;   /* Automatically appends itself safely below the workspace content */
+    padding-bottom: 100px;
+  }
+
+  .About .about-header {
+    height: auto;
+    width: 75%; /* Scales the title asset to fit comfortably inside a phone screen width */
+    margin-top: 5vh;
+  }
+
+  .About .about-content {
+    width: 90%;
+    font-size: 16px; /* Increases readability by dropping to a mobile-standard type scale */
+    line-height: 1.5;
+  }
+}
+
 /* Global Shared Keyframes */
 @keyframes jitter {
   0% {
