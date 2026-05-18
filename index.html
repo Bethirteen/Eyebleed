@@ -102,30 +102,43 @@
 
         <div class="notebook-links-grid">
           <a href="#volume-0" class="volume-trigger" data-volume="00"
-            >#Notebook_00</a
+            >#Notebook 00</a
           >
           <a href="#volume-1" class="volume-trigger" data-volume="01"
-            >#Notebook_01</a
+            >#Notebook 01</a
           >
           <a href="#volume-2" class="volume-trigger" data-volume="02"
-            >#Notebook_02</a
+            >#Notebook 02</a
           >
           <a href="#volume-3" class="volume-trigger" data-volume="03"
-            >#Notebook_03</a
+            >#Notebook 03</a
           >
           <a href="#volume-4" class="volume-trigger" data-volume="04"
-            >#Notebook_04</a
+            >#Notebook 04</a
           >
           <a href="#volume-5" class="volume-trigger" data-volume="05"
-            >#Notebook_05</a
+            >#Notebook 05</a
           >
         </div>
 
         <div id="notebook-archive-stage" class="hidden">
-         
-
           <div id="notebook-pages-array"></div>
-           <button type="button" id="close-archive-btn">Return</button>
+          <button type="button" id="close-archive-btn">Return</button>
+        </div>
+        <div id="image-viewer-stage" class="hidden">
+          <div class="viewer-header">
+            <h2 id="viewer-page-title">SPECIMEN_ERROR //</h2>
+          </div>
+
+          <div class="viewer-display-frame">
+            <img src="" alt="Active Archival Scan" id="viewer-main-image" />
+          </div>
+
+          <div class="viewer-associated-tray">
+            <span class="tray-label">Relevant Pages:</span>
+            <div id="viewer-associated-links"></div>
+          </div>
+          <button type="button" id="close-viewer-btn">Return</button>
         </div>
       </div>
       <div class="About" id="about">

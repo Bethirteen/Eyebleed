@@ -1,6 +1,7 @@
-html, body {
+html,
+body {
   min-height: 100vh; /* Establishes a minimum of full screen height, but allows infinite growth */
-  height: auto;      /* Unlocks the rigid 100% ceiling so it expands with scrolled content */
+  height: auto; /* Unlocks the rigid 100% ceiling so it expands with scrolled content */
 }
 
 body {
@@ -11,25 +12,29 @@ body {
 }
 
 /* FORCE THE TRANSPARENT FILE EVERYWHERE TO TRAP THE DEFAULT ARROW */
-html, body, *, *::before, *::after {
+html,
+body,
+*,
+*::before,
+*::after {
   cursor: url("Assets/transparent.png"), none !important;
 }
 /* 3. YOUR CUSTOM ANIMATED POINTER LAYERING */
 #custom-cursor {
-  width: 64px;        
+  width: 64px;
   height: 64px;
-  background-image: url("Assets/gifs/cursor.gif"); 
+  background-image: url("Assets/gifs/cursor.gif");
   background-size: contain;
   background-repeat: no-repeat;
-  
-  position: fixed;     
+
+  position: fixed;
   top: 0;
   left: 0;
-  pointer-events: none; 
-  z-index: 99999;      
-  
-  image-rendering: pixelated; 
-  transform: translate(-50%, -50%); 
+  pointer-events: none;
+  z-index: 99999;
+
+  image-rendering: pixelated;
+  transform: translate(-50%, -50%);
 }
 
 html,
@@ -75,7 +80,7 @@ body {
 }
 #landingLogo {
   width: 40%;
-   height: 30%;
+  height: 30%;
 }
 #CardBody {
   font-size: 25px;
@@ -278,7 +283,7 @@ nav a.portfolio-link img:hover {
 }
 /* VISUAL CONTAINER LAYER */
 .Notebooks {
-  position: relative; 
+  position: relative;
   text-align: center;
   margin: 35vh auto 0 auto; /* Centers horizontally and clears the fixed nav/counter */
   width: 90%;
@@ -293,10 +298,10 @@ nav a.portfolio-link img:hover {
   box-sizing: border-box;
 
   /* THE HEAVY KINETIC ENGINE: Noticeably slow, mechanical expansion curves */
-  transition: 
-    margin 3.05s cubic-bezier(0.16, 1, 0.3, 1), 
-    height 1.05s cubic-bezier(0.16, 1, 0.3, 1), 
-    max-width 1.05s cubic-bezier(0.16, 1, 0.3, 1), 
+  transition:
+    margin 3.05s cubic-bezier(0.16, 1, 0.3, 1),
+    height 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+    max-width 1.05s cubic-bezier(0.16, 1, 0.3, 1),
     padding 1.05s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -316,9 +321,9 @@ nav a.portfolio-link img:hover {
 }
 
 .notebook-links-grid a {
-  text-decoration: none;
+  text-decoration: underline;
   color: #1a1a1a;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -485,18 +490,17 @@ html {
   border: 2px solid #000000; /* Wraps the red thumb in a heavy black border line */
   /* THE BLEED GLOW ENGINE */
   /* Outset shadow casts a 10px crimson aura; inset shadow makes the inner core hum */
-  box-shadow: 
-    0 0 10px rgba(255, 51, 51, 0.8), 
+  box-shadow:
+    0 0 10px rgba(255, 51, 51, 0.8),
     inset 0 0 6px rgba(255, 51, 51, 1);
 }
 
 /* Visual state when hovering over the slider container */
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgb(121, 0, 0) rgb(243, 241, 235); /* Darkens to a dried-blood tone on engagement */
-  box-shadow: 
-    0 0 14px rgba(255, 51, 51, 1), 
+  box-shadow:
+    0 0 14px rgba(255, 51, 51, 1),
     inset 0 0 6px rgba(121, 0, 0, 1);
-  
 }
 /* ==========================================================================
    STATIONARY LOWER RIGHT ART CONTAINER
@@ -504,8 +508,8 @@ html {
 #corner-art {
   position: absolute;
   /* 120px (skeleton height) + 30px (desktop padding offset) = 150px above the container */
-  top: -150px; 
-  right: 30px;  /* Aligns tightly against the right viewport margin wall */
+  top: -150px;
+  right: 30px; /* Aligns tightly against the right viewport margin wall */
   z-index: 100; /* Maintains matching plane depth with the music controller */
   pointer-events: none; /* Ensures mouse clicks pass directly through the element */
 }
@@ -524,7 +528,7 @@ html {
     top: -85px;
     right: 20px;
   }
-  
+
   #corner-art img {
     height: 65px; /* Scales down to mirror the tablet audio controller scale */
   }
@@ -582,7 +586,7 @@ html {
   @media (max-width: 480px) {
     #landingLogo {
       width: 20%;
-   height: 15%;
+      height: 15%;
     }
     .Viewcounter {
       top: 82px; /* Tucks it tightly right beneath your 70px navigation bar */
@@ -602,9 +606,9 @@ html {
    MOBILE RESPONSIVE OVERRIDE ENGINE (Activates on screens <= 768px)
    ========================================================================== */
 @media (max-width: 768px) {
-  
   /* 1. VIEWPORT ADJUSTMENTS */
-  html, body {
+  html,
+  body {
     overflow-x: hidden; /* Hard-stops horizontal layout spilling and side-scrolling */
   }
 
@@ -620,7 +624,7 @@ html {
     text-align: center;
   }
 
- nav img {
+  nav img {
     height: 95px; /* Restores prominent presence on mobile displays like the iPhone XR */
     width: auto;
     margin-right: 0;
@@ -651,8 +655,8 @@ html {
   /* 4. THE ABOUT SECTION TRACKING RESET */
   .About {
     position: relative; /* Switches from absolute coordinates to standard document flow */
-    top: auto;          /* Unlocks it from the hardcoded desktop 135vh line */
-    margin-top: 10vh;   /* Automatically appends itself safely below the workspace content */
+    top: auto; /* Unlocks it from the hardcoded desktop 135vh line */
+    margin-top: 10vh; /* Automatically appends itself safely below the workspace content */
     padding-bottom: 100px;
   }
 
@@ -716,17 +720,51 @@ html {
 
 /* 2. THE HIGH-SPEED ESCAPE JUNCTION */
 .archive-engaged .Viewcounter {
-  animation: counter-drag-escape 0.44s forwards cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  animation: counter-drag-escape 0.44s forwards
+    cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
 
 /* 3. TRANSFORMS THE MASSIVE HOUSING FRAME */
 .archive-engaged .Notebooks {
-  margin: 110px auto 0 auto; /* Glides smoothly up into the vacated header territory */
-  height: 85vh;             /* Expands downward to handle the layout grid depth */
-  max-width: 1600px;        
-  padding: 40px;
+  margin: 110px auto 0 auto; /* */
+  max-width: 1600px; /* */
+  padding: 40px; /* */
+  height: 85vh;
+
+  /* NEW: Controls the transition speed on the WAY BACK (when .viewer-engaged is removed).
+     Adjust '0.8s' up or down to calibrate how fast the container shrinks back to the grid view. */
+  transition: 
+    margin 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    height 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    max-width 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    padding 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* NEW MODIFIER STATE: Unlocks the container ONLY when the image viewer is actively spawned */
+.viewer-engaged .Notebooks {
+/* CRITICAL: Keeps your paper corners perfectly locked to the box frame as it stretches */
+  background-size: 100% 100% !important; 
+
+  /* NEW: Overrides the baseline 1.75s transition speed strictly for this morph sequence.
+     Change '1.2s' to whatever duration feels right for your pacing. */
+  transition: 
+    margin 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    height 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    max-width 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    padding 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* NEW: Scales down the header banner graphic inside the active viewing interface */
+.viewer-engaged #notebooks-main-header {
+  /* Adjust this width or max-width percentage to fine-tune the size of the asset */
+  max-width: 40%; 
+  max-height: 15%;
+  margin: 0 auto;
+  margin-bottom: 2%;
+  display: block;
+
+  /* Matches the duration of the container morph so it shrinks smoothly alongside the paper */
+  transition: max-width 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
+}
 /* 4. CONTENT ARRAY SUB-STAGE LAYOUT */
 #notebook-archive-stage {
   display: flex;
@@ -737,40 +775,90 @@ html {
   box-sizing: border-box;
 }
 
-/* THE ASYMMETRIC INNER PAGE LINKS GRID */
-/* Replicates the exact column/row spacing configuration of your volume grid selection menu */
+/* THE ISOLATED SUB-SCROLL TRAY */
 #notebook-pages-array {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 25px 40px;
-  width: 85%;
-  max-width: 1100px;
-  height: 50%;
-  margin: 5% auto 0 auto; /* Visually balances the gap below your active header image */
-  box-sizing: border-box;
+  grid-auto-rows: 90px; /* */
+  gap: 25px 40px; /* */
+  width: 85%; /* */
+  max-width: 1100px; /* */
+  height: 52%; /* */
+  margin: 5% auto 0 auto; /* */
+  box-sizing: border-box; /* */
+
+  /* SCROLL LOCK CHASSIS */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 20px;
+  padding-bottom: 20px;
+
+  /* MODERN STANDARD COMPATIBILITY (Firefox) */
+  /* Format: thumb-color track-color */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(121, 0, 0) rgba(0, 0, 0, 0.04); /* */
+}
+
+/* 5. SCOPED ARCHIVAL INTERNAL SCROLLBAR STYLING (Chrome, Safari, Edge) */
+#notebook-pages-array::-webkit-scrollbar {
+  width: 8px; /* */
+}
+#notebook-pages-array::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.04); /* */
+  border-left: 2px dashed rgba(26, 26, 26, 0.2);
+}
+#notebook-pages-array::-webkit-scrollbar-thumb {
+  /* High-Contrast Deep Red Target */
+  background-color: rgb(121, 0, 0);
+  border: 2px solid #000000;
+}
+
+/* HAND-COMPILED 8-POINT ASYMMETRIC PHYSICS MATRIX */
+/* Assigns unique, non-linear structural rotations strictly to entries 1 through 8 */
+#notebook-pages-array a:nth-child(1) {
+  transform: rotate(-1.5deg) translate(-10px, 4px);
+}
+#notebook-pages-array a:nth-child(2) {
+  transform: rotate(1.2deg) translate(8px, -6px);
+}
+#notebook-pages-array a:nth-child(3) {
+  transform: rotate(-0.8deg) translate(12px, 8px);
+}
+#notebook-pages-array a:nth-child(4) {
+  transform: rotate(1.8deg) translate(-6px, -2px);
+}
+#notebook-pages-array a:nth-child(5) {
+  transform: rotate(-2.2deg) translate(-4px, 10px);
+}
+#notebook-pages-array a:nth-child(6) {
+  transform: rotate(1.4deg) translate(14px, 2px);
+}
+#notebook-pages-array a:nth-child(7) {
+  transform: rotate(-1.1deg) translate(-12px, -4px);
+}
+#notebook-pages-array a:nth-child(8) {
+  transform: rotate(2deg) translate(6px, 6px);
+}
+
+/* If a notebook has more than 8 pages, default to a subtle alternating fallback tilt */
+#notebook-pages-array a:nth-child(n + 9):nth-child(odd) {
+  transform: rotate(-1deg);
+}
+#notebook-pages-array a:nth-child(n + 9):nth-child(even) {
+  transform: rotate(1deg);
 }
 
 #notebook-pages-array a {
-  text-decoration: none;
-  color: #1a1a1a; /* */
-  font-size: 22px; /* Matches the text sizing of your primary notebook titles */
+  color: #1a1a1a;
+  font-size: 22px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
+  text-decoration: underline;
 }
-
-/* Precise replication of your structural rotational physics */
-#notebook-pages-array a:nth-child(1) { transform: rotate(-1.5deg) translate(-10px, 4px); }
-#notebook-pages-array a:nth-child(2) { transform: rotate(1deg) translate(8px, -6px); }
-#notebook-pages-array a:nth-child(3) { transform: rotate(-0.8deg) translate(12px, 8px); }
-#notebook-pages-array a:nth-child(4) { transform: rotate(1.8deg) translate(-6px, -2px); }
-#notebook-pages-array a:nth-child(5) { transform: rotate(-2deg) translate(-4px, 10px); }
-#notebook-pages-array a:nth-child(6) { transform: rotate(1.2deg) translate(14px, 2px); }
 
 /* Interaction state */
 #notebook-pages-array a:hover {
@@ -802,25 +890,183 @@ html {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* 6. CURSOR PROJECTION SUB-ENGINE */
+/* 6. BIT-CRUSHED CURSOR PROJECTION OVERRIDE */
 #custom-cursor.thumbnail-active {
-  width: 240px;  
-  height: 240px; 
-  background-color: rgba(16, 16, 16, 0.96); 
-  border: 2px solid #000000; 
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain; 
+  width: 100px; /* Scaled down from 240px to make the lens tracking tighter and smaller */
+  height: 100px; /* Balanced square viewport framework */
+  background-color: rgba(16, 16, 16, 0.96); /* */
+  border: 2px solid #000000; /* */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  background-position: center; /* */
+  background-repeat: no-repeat; /* */
+
+  /* CRITICAL: Forces the image to stretch and distort to fill the box entirely, bypassing aspect ratio limits */
+  background-size: 100% 100%;
 }
 
 /* ==========================================================================
    VIOLENT OVERHEAD EXIT DRAG MATRIX
    ========================================================================== */
 @keyframes counter-drag-escape {
-  0% { top: 100px; transform: translateX(-50%) rotate(0deg); }
-  20% { top: 70px; transform: translateX(-54%) rotate(-3deg); }
-  45% { top: 30px; transform: translateX(-44%) rotate(4deg); }
-  70% { top: -30px; transform: translateX(-53%) rotate(-2deg); }
-  100% { top: -280px; transform: translateX(-50%) rotate(0deg); }
+  0% {
+    top: 100px;
+    transform: translateX(-50%) rotate(0deg);
+  }
+  20% {
+    top: 70px;
+    transform: translateX(-54%) rotate(-3deg);
+  }
+  45% {
+    top: 30px;
+    transform: translateX(-44%) rotate(4deg);
+  }
+  70% {
+    top: -30px;
+    transform: translateX(-53%) rotate(-2deg);
+  }
+  100% {
+    top: -280px;
+    transform: translateX(-50%) rotate(0deg);
+  }
+}
+/* ==========================================================================
+   IMAGE VIEWING INTERFACE
+   ========================================================================== */
+
+/* 1. STAGE DISPLAY HOUSING */
+#image-viewer-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+}
+
+/* 2. HEADER PLATFORM */
+.viewer-header {
+  margin-top: 15vh; /* Safely clears the absolute mutated banner space */
+  margin-bottom: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+#viewer-page-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1a1a1a; /* */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+/* 4. AMPLIFIED IMAGE VIEWPORT CHASSIS */
+.viewer-display-frame {
+  display: flex; /* */
+  justify-content: center; /* */
+  align-items: center; /* */
+  width: fit-content; /* */
+  max-width: 100%; /* Ensures it never exceeds the viewport width */
+  background-color: rgba(0, 0, 0, 0.03); /* */
+  border: 2px solid #000000; /* */
+  overflow: hidden; /* */
+
+  /* EXPANDED SPECIMEN CANVAS: Blurs out boundaries so full-page drawings dominate */
+  max-width: 1000px; /* Widened from 750px */
+  height: 65vh; /* Deepened from 40vh to maximize single-page details */
+  margin-bottom: 25px;
+}
+
+#viewer-main-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Keeps raw proportions clean and un-stretched here */
+  image-rendering: pixelated; /* Guarantees scan lines remain razor sharp */
+}
+
+/* 4. ASSOCIATED JUMP LINKS TRAY */
+.viewer-associated-tray {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.viewer-associated-tray .tray-label {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #555555;
+  letter-spacing: 1px;
+}
+
+#viewer-associated-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+#viewer-associated-links a {
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #1a1a1a; /* */
+  text-transform: uppercase;
+}
+
+#viewer-associated-links a:hover {
+  animation: jitter 0.1s infinite; /* */
+}
+
+/* 6. EXIT TRIGGER CONTROL (Landing Page Mirror Option) */
+#close-viewer-btn {
+  display: block;
+  margin: 10px auto 25px auto; /* */
+  padding: 10px 20px; /* */
+  font-size: 18px; /* */
+  cursor: pointer; /* */
+  will-change: transform; /* */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* */
+  transition: background-color 0.4s ease; /* */
+  border-radius: 0; /* */
+  border: 1px solid #000; /* */
+  background-color: #fff; /* */
+  color: #000000; /* */
+  font-family: inherit; /* */
+}
+
+#close-viewer-btn:hover {
+  background-color: #f0f0f0; /* */
+  animation: jitter 0.1s infinite; /* */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* */
+}
+/* ==========================================================================
+   SUB-STAGE ENTRANCE KINETICS
+   ========================================================================== */
+
+/* Triggers a fluid glide-and-fade when the page grid is brought back into view */
+#notebook-archive-stage:not(.hidden) {
+  animation: dynamicStageFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Triggers a slightly elongated, deliberate entry fade for the drawing canvas and comment logs */
+#image-viewer-stage:not(.hidden) {
+  animation: dynamicStageFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* THE SEAMLESS TRANSITION CORE */
+@keyframes dynamicStageFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Starts slightly lower down the layout axis */
+    filter: blur(2px);           /* Optional: Adds a faint, out-of-focus archival look on entry */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);    /* Settles perfectly into the structural grid line */
+    filter: blur(0);
+  }
 }
