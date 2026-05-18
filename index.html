@@ -131,9 +131,16 @@
           </div>
 
           <div class="viewer-display-frame">
-            <img src="" alt="Active Archival Scan" id="viewer-main-image" />
+            <button type="button" id="viewer-prev-btn" class="arrow-btn">
+              <img src="Assets/left.png" alt="Previous Page" />
+            </button>
+            <a href="#" id="viewer-main-link" target="_blank">
+            <img src="" alt="Active Page" id="viewer-main-image" />
+            </a>
+            <button type="button" id="viewer-next-btn" class="arrow-btn">
+              <img src="Assets/right.png" alt="Next Page" />
+            </button>
           </div>
-
           <div class="viewer-associated-tray">
             <span class="tray-label">Relevant Pages:</span>
             <div id="viewer-associated-links"></div>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0a0a0a; /* Stark, dark void background to isolate the artwork */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* Allows vertical panning if the image is massive */
+      overflow: auto; /* Enables native browser scrollbars/panning on deep zoom */
+    }
+
+    #isolated-canvas {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 40px auto;
+      image-rendering: pixelated; /* Keeps your hatching and line art razor sharp */
+      border: 1px solid #222;
+      cursor: zoom-in; /* Signals to the viewer that they can click to magnify further */
+    }
+
+    /* Native browser zoom toggle mechanic when clicked */
+    #isolated-canvas.magnified {
+      max-width: none;
+      cursor: zoom-out;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="isolated-canvas" src="" alt="" />
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Decode the payload strings straight from the URL parameters
+      const params = new URLSearchParams(window.location.search);
+      const imgPath = params.get("img");
+      const pageTitle = params.get("title");
+      const hiddenDesc = params.get("desc");
+
+      const canvasImg = document.getElementById("isolated-canvas");
+
+      if (canvasImg && imgPath) {
+        canvasImg.src = imgPath;
+        
+        // ASSIGNS THE SECRET DESCRIPTION TO THE ALT TAG:
+        // Visible immediately to anyone inspecting the isolated canvas code structure
+        canvasImg.alt = hiddenDesc || pageTitle || "UNNAMED_SPECIMEN";
+        
+        document.title += ` ${pageTitle || ""}`;
+      }
+
+      // Simple kinetic toggle for full-scale magnification switching
+      if (canvasImg) {
+        canvasImg.addEventListener("click", () => {
+          canvasImg.classList.toggle("magnified");
+        });
+      }
+    });
+  </script>
+</body>
+</html>

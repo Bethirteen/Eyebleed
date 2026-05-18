@@ -286,7 +286,7 @@ nav a.portfolio-link img:hover {
   position: relative;
   text-align: center;
   margin: 35vh auto 0 auto; /* Centers horizontally and clears the fixed nav/counter */
-  width: 90%;
+  width: 95%;
   max-width: 1450px;
   height: 80vh;
 
@@ -734,7 +734,7 @@ html {
   /* NEW: Controls the transition speed on the WAY BACK (when .viewer-engaged is removed).
      Adjust '0.8s' up or down to calibrate how fast the container shrinks back to the grid view. */
   transition: 
-    margin 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    margin 2.2s cubic-bezier(0.16, 1, 0.3, 1), 
     height 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
     max-width 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
     padding 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -892,10 +892,10 @@ html {
 
 /* 6. BIT-CRUSHED CURSOR PROJECTION OVERRIDE */
 #custom-cursor.thumbnail-active {
-  width: 100px; /* Scaled down from 240px to make the lens tracking tighter and smaller */
-  height: 100px; /* Balanced square viewport framework */
+  width: 75px; /* Scaled down from 240px to make the lens tracking tighter and smaller */
+  height: 75px; /* Balanced square viewport framework */
   background-color: rgba(16, 16, 16, 0.96); /* */
-  border: 2px solid #000000; /* */
+  border: 1px solid #000000; /* */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
   background-position: center; /* */
   background-repeat: no-repeat; /* */
@@ -961,28 +961,60 @@ html {
   margin: 0;
 }
 
-/* 4. AMPLIFIED IMAGE VIEWPORT CHASSIS */
+/* 3. THE UNSTYLED INNER ROW LAYOUT ENGINE */
 .viewer-display-frame {
-  display: flex; /* */
-  justify-content: center; /* */
-  align-items: center; /* */
-  width: fit-content; /* */
-  max-width: 100%; /* Ensures it never exceeds the viewport width */
-  background-color: rgba(0, 0, 0, 0.03); /* */
-  border: 2px solid #000000; /* */
-  overflow: hidden; /* */
-
-  /* EXPANDED SPECIMEN CANVAS: Blurs out boundaries so full-page drawings dominate */
-  max-width: 1000px; /* Widened from 750px */
-  height: 65vh; /* Deepened from 40vh to maximize single-page details */
+  display: flex;
+  justify-content: center; /* Centers the arrow-image-arrow row within the Notebook grid */
+  align-items: center;
+  gap: 40px;               /* Space between the arrows and the edge of your drawing */
+  width: 100%;
+  max-width: 1200px;       /* Opened up to give the arrows breathing room on the sides */
+  background: none;        /* REMOVED: Strips the old frame background */
+  border: none;            /* REMOVED: Strips the old frame border */
+  box-shadow: none;        /* REMOVED: Strips the old frame inset shadows */
+  overflow: visible;       /* Allows arrows to sit free without clipping boundary lines */
   margin-bottom: 25px;
 }
 
+/* 5. THE SPECIMEN CANVAS WITH TIGHT BLACK BORDER */
 #viewer-main-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Keeps raw proportions clean and un-stretched here */
-  image-rendering: pixelated; /* Guarantees scan lines remain razor sharp */
+  max-width: 100%;         /* Allows fluid downscaling if the drawing is massive */
+  max-height: 65vh;        /* Keeps your vertical sizing limits intact */
+  text-decoration: none;
+  /* FIXED: Changes from 100% to auto so the element frame snaps inward 
+     and matches the exact outer pixel limits of your actual image file */
+  width: auto;             
+  height: auto;            /* */
+  object-fit: contain;     /* */
+  image-rendering: pixelated; /* */
+  border: 1px solid #000000;  /* The border now binds strictly to the canvas artwork edge */
+}
+
+
+/* 5. STARK ARROW BUTTON HOUSINGS */
+.arrow-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  will-change: transform;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;          /* Prevents the arrow images from squishing on small screens */
+}
+
+.arrow-btn:hover {
+  transform: scale(1.2);
+  animation: jitter 0.4s infinite;
+}
+
+.arrow-btn img {
+  width: 20%;             /* Scale up or down depending on your raw PNG resolution */
+  height: auto;
+  image-rendering: pixelated;
 }
 
 /* 4. ASSOCIATED JUMP LINKS TRAY */
@@ -1069,4 +1101,17 @@ html {
     transform: translateY(0);    /* Settles perfectly into the structural grid line */
     filter: blur(0);
   }
+}
+/* VIEWPORT SPECIMEN LINK TRACKING */
+#viewer-main-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  max-width: 75%; /* The link container now securely holds the 75% width boundary */
+  text-decoration: none;
+}
+#viewer-main-link:hover #viewer-main-image {
+  border: 2px solid rgb(121, 0, 0); /* Ensures the border thickness remains consistent during the color change */
+  transition: border-color 0.2s ease;
 }
