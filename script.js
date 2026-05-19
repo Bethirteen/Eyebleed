@@ -345,197 +345,193 @@ document.addEventListener("DOMContentLoaded", () => {
   )
     return;
 
-  // 1. VOLUME LINK ENGAGEMENT PROCESSOR
-  document.querySelectorAll(".volume-trigger").forEach((trigger) => {
-    trigger.addEventListener("click", (e) => {
-      e.preventDefault(); // Stop native anchor viewport snapping
+// ==========================================================================
+  // SHARED ARCHIVE GRID GENERATOR ENGINE
+  // ==========================================================================
+  function loadNotebookArchive(volId) {
+    const pages = notebookCatalog[volId] || []; //
 
-      notebookClickSound.currentTime = 0; //
-      notebookClickSound
-        .play()
-        .catch((err) => console.error("Audio playback blocked:", err)); //
-
-      const volId = trigger.getAttribute("data-volume"); // Pulls "00", "01", etc.
-      const pages = notebookCatalog[volId] || []; //
-
-      // DYNAMIC GRAPHIC MUTATION: Swap header text banner
+    // Update the header text banner graphic dynamically
+    if (mainHeaderImg) {
       mainHeaderImg.src = `Assets/Notebook${volId}.png`; //
       mainHeaderImg.alt = `Notebook ${volId} Header`; //
+    }
+
+    // Clear out the previous index array entries from the tray
+    pagesArrayContainer.innerHTML = ""; //
+
+    if (pages.length === 0) { //
+      pagesArrayContainer.innerHTML =
+        "<p style='color:#1a1a1a; font-style:italic;'>Volume details currently vacant...</p>"; //
+    } else { //
+      // Build out the minimalist text line structure
+      pages.forEach((page) => { //
+        const pageLink = document.createElement("a"); //
+        pageLink.href = "#"; //
+        pageLink.textContent = page.title; //
+
+        // CURSOR THUMBNAIL HOVER MODES
+        pageLink.addEventListener("mouseenter", () => { //
+          globalCursorElement.style.backgroundImage = `url("${page.img}")`; //
+          globalCursorElement.classList.add("thumbnail-active"); //
+        }); //
+
+        pageLink.addEventListener("mouseleave", () => { //
+          globalCursorElement.style.backgroundImage = 'url("Assets/gifs/cursor.gif")'; //
+          globalCursorElement.classList.remove("thumbnail-active"); //
+        }); //
+
+        // TRIGGER: Step inside the image viewing interface when a link is clicked
+        pageLink.addEventListener("click", (el) => { //
+          el.preventDefault(); //
+
+          notebookClickSound.currentTime = 0; //
+          notebookClickSound.play().catch(() => {}); //
+
+          openImageViewer(page, pages); //
+        }); //
+
+        pagesArrayContainer.appendChild(pageLink); //
+      }); //
+    } //
+  }
+
+  // 1. VOLUME LINK ENGAGEMENT PROCESSOR
+  document.querySelectorAll(".volume-trigger").forEach((trigger) => { //
+    trigger.addEventListener("click", (e) => { //
+      e.preventDefault(); //
+
+      notebookClickSound.currentTime = 0; //
+      notebookClickSound.play().catch((err) => console.error("Audio playback blocked:", err)); //
+
+      const volId = trigger.getAttribute("data-volume"); //
       
-
-      // Clear out the previous index array entries from the tray
-      pagesArrayContainer.innerHTML = ""; //
-
-      if (pages.length === 0) {
-        //
-        pagesArrayContainer.innerHTML =
-          "<p style='color:#1a1a1a; font-style:italic;'>Volume details currently vacant...</p>"; //
-      } else {
-        // Build out the minimalist text line structure
-        pages.forEach((page) => {
-          //
-          const pageLink = document.createElement("a"); //
-          pageLink.href = "#"; //
-          pageLink.textContent = page.title; //
-
-          // CURSOR TRANSFORMATION MODE (Option 1)
-          pageLink.addEventListener("mouseenter", () => {
-            //
-            globalCursorElement.style.backgroundImage = `url("${page.img}")`; //
-            globalCursorElement.classList.add("thumbnail-active"); //
-          });
-
-          pageLink.addEventListener("mouseleave", () => {
-            //
-            globalCursorElement.style.backgroundImage =
-              'url("Assets/gifs/cursor.gif")'; //
-            globalCursorElement.classList.remove("thumbnail-active"); //
-          });
-
-          // TRIGGER: Step inside the image viewing interface when a link is clicked
-          pageLink.addEventListener("click", (el) => {
-            el.preventDefault();
-
-            // Strike the tactile interface snap sound
-            notebookClickSound.currentTime = 0;
-            notebookClickSound.play().catch(() => {});
-
-            // Pass this active item and the whole parent array into the viewing deck
-            openImageViewer(page, pages);
-          });
-
-          pagesArrayContainer.appendChild(pageLink); //
-        });
-      }
+      // Load the corresponding notebook list into the background chassis
+      loadNotebookArchive(volId);
 
       // Lock morphing animation states into action
       mainView.classList.add("archive-engaged"); //
       archiveStage.classList.remove("hidden"); //
 
-      // CALIBRATED VIEWPORT ALIGNMENT: Match the exact 1.75s timing of your CSS transition
-      syncScrollToTop(1750);
-    });
-  });
+      syncScrollToTop(1750); //
+    }); //
+  }); //
 
   // 2. BACK BUTTON RESET MECHANISM: Retract views and restore baseline gallery flow
-  closeBtn.addEventListener("click", () => {
-    mainView.classList.remove("archive-engaged");
-    archiveStage.classList.add("hidden");
+  closeBtn.addEventListener("click", () => { //
+    mainView.classList.remove("archive-engaged"); //
+    archiveStage.classList.add("hidden"); //
 
-    UIButtonClickSound.currentTime = 0;
-    UIButtonClickSound.play().catch(() => {});
-    // RESTORE LAYOUT HEADLINE: Slide standard global heading graphic back into position
-    mainHeaderImg.src = "Assets/Notebooks.png";
-    mainHeaderImg.alt = "Notebooks header";
+    UIButtonClickSound.currentTime = 0; //
+    UIButtonClickSound.play().catch(() => {}); //
+    
+    mainHeaderImg.src = "Assets/Notebooks.png"; //
+    mainHeaderImg.alt = "Notebooks header"; //
 
-    // Safety drop-off reset to guarantee cursor design parameters clear safely
     globalCursorElement.style.backgroundImage = 'url("Assets/gifs/cursor.gif")'; //
-    globalCursorElement.classList.remove("thumbnail-active");
-  });
-// ==========================================================================
+    globalCursorElement.classList.remove("thumbnail-active"); //
+  }); //
+ // ==========================================================================
   // CORE IMAGE VIEWPORT MANAGEMENT ENGINE (With Continuous Global Searching)
   // ==========================================================================
-  function openImageViewer(activePage, allPages) {
+  function openImageViewer(activePage, allPages) { //
     // Sync active loop coordinates for tracking mechanics
-    currentPagesArray = allPages;
-    currentPageIndex = allPages.findIndex(p => p.title === activePage.title);
+    currentPagesArray = allPages; //
+    currentPageIndex = allPages.findIndex(p => p.title === activePage.title); //
 
-    // DYNAMIC GRAPHIC MUTATION: Scan the ledger, match ownership, and alter the header banner
-    let activeVolId = "00";
-    for (const volId in notebookCatalog) {
-      if (notebookCatalog[volId].some(p => p.title === activePage.title)) {
-        activeVolId = volId;
-        break;
-      }
+    // FIXED: Force-reset the custom cursor state immediately upon entering the viewer.
+    // This pops the cached thumbnail layout and restores your default tracking pointer animation.
+    if (globalCursorElement) {
+      globalCursorElement.style.backgroundImage = 'url("Assets/gifs/cursor.gif")';
+      globalCursorElement.classList.remove("thumbnail-active");
     }
-    if (mainHeaderImg) {
-      mainHeaderImg.src = `Assets/Notebook${activeVolId}.png`;
-      mainHeaderImg.alt = `Notebook ${activeVolId} Header`;
-    }
+
+    // DYNAMIC BACKGROUND TRACKING: Scan ownership and update the index structure silently
+    let activeVolId = "00"; //
+    for (const volId in notebookCatalog) { //
+      if (notebookCatalog[volId].some(p => p.title === activePage.title)) { //
+        activeVolId = volId; //
+        break; //
+      } //
+    } //
+    
+    // Dynamically syncs the background grid listing array to match the active page's volume
+    loadNotebookArchive(activeVolId); //
 
     const notebookContainer = document.querySelector(".Notebooks"); //
-    if (!notebookContainer) return;
+    if (!notebookContainer) return; //
     
     // 1. Capture the exact starting height in pixels before changing anything
-    const startHeight = notebookContainer.getBoundingClientRect().height; 
-    notebookContainer.style.height = `${startHeight}px`;
+    const startHeight = notebookContainer.getBoundingClientRect().height; //
+    notebookContainer.style.height = `${startHeight}px`; //
 
     // 2. Populate text headers and main image sources
     if (viewerPageTitle) viewerPageTitle.textContent = activePage.title; //
-    if (viewerMainImage) {
+    if (viewerMainImage) { //
       viewerMainImage.src = activePage.img; //
-      
-      // FIXED: Assigns your custom description text to the live DOM alt attribute 
-      // so it is immediately visible upon developer tool inspection.
-      viewerMainImage.alt = activePage.description || activePage.title;
-      // NEW: Safely encodes text parameters into a secure URL query line
-    if (viewerMainLink) {
-      const encodedImg = encodeURIComponent(activePage.img);
-      const encodedTitle = encodeURIComponent(activePage.title.split(":")[0].trim());
-      const encodedDesc = encodeURIComponent(activePage.description || "");
-      
-      // Updates the target path to spawn your isolation view layout smoothly
-      viewerMainLink.href = `isolate.html?img=${encodedImg}&title=${encodedTitle}&desc=${encodedDesc}`;
+      viewerMainImage.alt = activePage.description || activePage.title; //
+    } //
+
+    if (viewerMainLink) { //
+      const encodedImg = encodeURIComponent(activePage.img); //
+      const encodedTitle = encodeURIComponent(activePage.title.split(":")[0].trim()); //
+      const encodedDesc = encodeURIComponent(activePage.description || ""); //
+      viewerMainLink.href = `isolate.html?img=${encodedImg}&title=${encodedTitle}&desc=${encodedDesc}`; //
     }
-    }
-    
 
     // 3. CONTINUOUS GLOBAL ROUTER LOGIC
-    if (viewerAssociatedLinks) {
-      viewerAssociatedLinks.innerHTML = "";
+    if (viewerAssociatedLinks) { //
+      viewerAssociatedLinks.innerHTML = ""; //
 
-      if (activePage.associated && activePage.associated.length > 0) {
-        activePage.associated.forEach((assocTarget) => {
-          let targetPageObj = null;
-          let targetNotebookPages = null;
-          const targetClean = assocTarget.trim();
+      if (activePage.associated && activePage.associated.length > 0) { //
+        activePage.associated.forEach((assocTarget) => { //
+          let targetPageObj = null; //
+          let targetNotebookPages = null; //
+          const targetClean = assocTarget.trim(); //
 
-          // Scan through every single volume key in the global data ledger
-          for (const volId in notebookCatalog) {
-            const pagesInVol = notebookCatalog[volId];
-            const found = pagesInVol.find(p => p.title.split(":")[0].trim() === targetClean);
+          for (const volId in notebookCatalog) { //
+            const pagesInVol = notebookCatalog[volId]; //
+            const found = pagesInVol.find(p => p.title.split(":")[0].trim() === targetClean); //
             
-            if (found) {
-              targetPageObj = found;
-              targetNotebookPages = pagesInVol;
-              break;
-            }
-          }
+            if (found) { //
+              targetPageObj = found; //
+              targetNotebookPages = pagesInVol; //
+              break; //
+            } //
+          } //
 
-          // Render the navigation link anchor if the target exists anywhere in the archive
-          if (targetPageObj) {
-            const assocLink = document.createElement("a");
-            assocLink.href = "#";
-            assocLink.textContent = targetPageObj.title.split(":")[0].trim();
+          if (targetPageObj) { //
+            const assocLink = document.createElement("a"); //
+            assocLink.href = "#"; //
+            assocLink.textContent = targetPageObj.title.split(":")[0].trim(); //
 
-            assocLink.addEventListener("click", (e) => {
-              e.preventDefault();
-              UIButtonClickSound.currentTime = 0;
-              UIButtonClickSound.play().catch(() => {});
+            assocLink.addEventListener("click", (e) => { //
+              e.preventDefault(); //
+              UIButtonClickSound.currentTime = 0; //
+              UIButtonClickSound.play().catch(() => {}); //
               
-              // Transitions into the new target context cleanly
-              openImageViewer(targetPageObj, targetNotebookPages);
-            });
+              openImageViewer(targetPageObj, targetNotebookPages); //
+            }); //
 
-            viewerAssociatedLinks.appendChild(assocLink);
-          }
-        });
-      }
-    }
+            viewerAssociatedLinks.appendChild(assocLink); //
+          } //
+        }); //
+      } //
+    } //
 
     // 4. Swap display visibility states
-    if (archiveStage) archiveStage.classList.add("hidden");
-    if (imageViewerStage) imageViewerStage.classList.remove("hidden");
-    if (mainView) mainView.classList.add("viewer-engaged");
+    if (archiveStage) archiveStage.classList.add("hidden"); //
+    if (imageViewerStage) imageViewerStage.classList.remove("hidden"); //
+    if (mainView) mainView.classList.add("viewer-engaged"); //
 
     // 5. Measure how tall the new content wants to be
-    notebookContainer.style.height = "auto";
-    const targetHeight = notebookContainer.getBoundingClientRect().height;
+    notebookContainer.style.height = "auto"; //
+    const targetHeight = notebookContainer.getBoundingClientRect().height; //
 
     // 6. Execute the CSS height transition morph sequence
-    notebookContainer.style.height = `${startHeight}px`;
-    notebookContainer.offsetHeight; // Forces a structural layout reflow
-    notebookContainer.style.height = `${targetHeight}px`;
+    notebookContainer.style.height = `${startHeight}px`; //
+    notebookContainer.offsetHeight; //
+    notebookContainer.style.height = `${targetHeight}px`; //
 
     syncScrollToTop(600); //
   }
