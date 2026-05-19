@@ -525,6 +525,17 @@ html {
    TABLET SAFETY NET (Screens up to 1024px)
    ========================================================================== */
 @media (max-width: 1024px) {
+    /* 1. VIEWPORT LAYOUT FIXES */
+    html {
+      overflow-x: visible !important; /* FIXED: Keeps the touch-scroll engine locked to the primary window */
+    }
+    
+    body {
+      overflow-x: hidden; /* Hard-stops horizontal layout spilling and canvas wobble safely */
+    }
+
+    /* ... Keep the rest of your #landingLogo and #CardBody styles exactly as they are ... */
+
 #CardBody {
     font-size: 22px; /* */
   }
@@ -546,7 +557,7 @@ html {
   nav a.portfolio-link {
     grid-column: 5; /* */
     justify-self: start; /* */
-    padding-right: 15px; /* */
+    padding-left: 45px; /* */
   }
 
   /* 1. DEFAULT STATE: Force exact scaling containment */
@@ -561,16 +572,16 @@ html {
     margin-bottom: 20%; /* */
     display: block; /* */
     height: auto !important; /* */
-    max-height: 20% !important; /* */
+    max-height: 18% !important; /* */
 
   }
   .notebook-links-grid {
     width: 85%; /* */
-    gap: 15px 20px; /* */
+    gap: 5px 5px; /* */
   }
 
   .notebook-links-grid a {
-    font-size: 26px; /* */
+    font-size: 28px; /* */
     text-decoration: underline; /* */
   }
 
@@ -594,7 +605,14 @@ html {
   .Viewcounter img:not(:first-child) {
     height: 85px; /* */
   }
-
+ /* ==========================================================================
+     ABOUT HEADER TABLET CALIBRATION (Inside @media (max-width: 1024px))
+     ========================================================================== */
+  .About .about-header {
+    height: auto !important;     /* FIXED: Kills the rigid 20vh desktop lock */
+    width: 28% !important;       /* Scales proportionally across the tablet screen */
+    margin-top: 3vh !important;  /* Provides clean breathing room from the top border */
+  }
  /* ==========================================================================
      TABLET VIEWER STATE FIX (Inside @media (max-width: 1024px))
      ========================================================================== */
@@ -648,10 +666,22 @@ html {
   .archive-engaged #notebooks-main-header {
     max-width: 38%; /* */
     margin: 0 auto; /* */
-    margin-bottom: 20%; /* */
+    margin-bottom: 15%; /* */
     display: block; /* */
     height: auto !important; /* */
     max-height: 14% !important; /* */
+  }
+ /* ==========================================================================
+     TABLET RETURN BUTTON CORRECTION (Inside @media (max-width: 1024px))
+     ========================================================================== */
+  #notebook-archive-stage {
+    /* FIXED: Neutralizes the desktop 'space-between' gravity so elements stack cleanly */
+    justify-content: flex-start !important; 
+  }
+
+  #close-archive-btn {
+    /* FIXED: Maps a simple, tight margin directly underneath your scroll grid */
+    margin: 40px auto !important; 
   }
 }
 /* ==========================================================================
@@ -665,13 +695,20 @@ html {
   }
 
   #landingLogo {
-    width: 60%; /* */
+    width: 85%; /* */
     height: auto; /* */
+  }
+  #CardTitle {
+    margin-top: 20px; /* */
+    width: fit-content;
   }
 
   #CardBody {
     font-size: 18px; /* */
     padding: 10px; /* */
+  }
+  #quote {
+    font-size: 16px !important; /* */
   }
 
   /* 2. NAVBAR RE-ARCHITECTURE: Collapse to flat menu list */
@@ -739,26 +776,71 @@ html {
     height: 26px; /* */
   }
 
-  /* 4. THE MAIN WORKSPACE & TAPE-PAPER FRAMING */
+/* ==========================================================================
+     4. THE MAIN WORKSPACE & TAPE-PAPER FRAMING (Inside @media (max-width: 768px))
+     ========================================================================== */
   .Notebooks {
-    margin: 470px auto 0 auto !important; /* Pushed down safely to make room for the visible tablet/mobile counter */
-    height: auto !important; /* Unlocks rigid height limits so mobile scrolling stays smooth */
-    min-height: 65vh; /* */
-    padding: 20px 10px !important; /* */
+    margin: 470px auto 0 auto !important;
+    height: 75vh !important; /* Locks the default view so the paper never stretches vertically */
+    min-height: auto !important;
+    padding: 20px 10px !important;
   }
 
   .archive-engaged .Notebooks {
     margin: 470px auto 0 auto !important;
-    height: 50% !important; /* */
-    padding: 20px 10px !important; /* */
+    
+    /* FIXED: Re-locks the container height so the tape-paper background stays perfectly proportioned */
+    height: 80vh !important; 
+    min-height: auto !important;
+    padding: 20px 10px !important;
   }
-
+  /* 1. CONTAINER BOUNDARY LOCK */
+  .viewer-engaged .Notebooks {
+    margin: 470px auto 0 auto !important;
+    
+    /* FIXED: Re-locks the height to stop the tape-paper from stretching */
+    height: 85vh !important; 
+    min-height: auto !important;
+    padding: 20px 10px !important;
+  }
+  /* Refines the header to sit cleanly below the now correctly-sized top tape graphic */
+  #notebooks-main-header{
+    top: 0 !important;
+    margin-top: 100px !important; 
+    width: 65% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin-bottom: 20px !important;
+  }
+   .archive-engaged #notebooks-main-header {
+    top: 0 !important;
+    margin-top: 120px !important; 
+    width: 60% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin-bottom: -10px !important;
+  }
+  .viewer-engaged #notebooks-main-header {
+      top: 20 !important;
+    margin-top: 180px !important; /* Matches your archive layout perfectly */
+    width: 60% !important;
+    max-width: none !important;
+    height: auto !important;
+    
+    /* FIXED: Matches the archive view's slight -10px tuck. This places the 
+       clipping edge identical to your page array links, ensuring the artwork
+       vanishes cleanly underneath the graphic without passing behind it. */
+    margin-bottom: 0px !important; 
+    
+    position: relative !important;
+    z-index: 20 !important; /* Keeps the header locked visually in front */
+  }
   /* 5. SINGLE-COLUMN INDEX GRID CONVERSION */
   .notebook-links-grid {
     grid-template-columns: 1fr !important; /* Forces layout items into one stacked column */
     grid-template-rows: auto; /* */
     height: auto; /* */
-    gap: 20px; /* */
+    gap: 30px; /* */
     margin: 30px auto 0 auto; /* */
   }
 
@@ -767,65 +849,87 @@ html {
     transform: none !important; /* Deactivates desktop rotations so text fits without overflow */
   }
 
-  /* 6. SUB-STAGE SCROLL TRAY COLLAPSE */
+/* ==========================================================================
+     6. SUB-STAGE SCROLL TRAY COLLAPSE (Inside @media (max-width: 768px))
+     ========================================================================== */
   #notebook-pages-array {
-    grid-template-columns: 1fr !important; /* */
-    grid-auto-rows: auto; /* */
-    height: 40vh; /* */
-    margin: 25px auto 0 auto; /* */
-    gap: 15px; /* */
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto;
+    
+    /* FIXED: Re-establishes a confined tracking window inside the locked paper canvas */
+    height: 45vh !important; 
+    width: 78% !important;
+    /* FIXED: Turns the internal scrollbar back on so the massive link list is safely scrollable */
+    overflow-y: auto !important; 
+    
+    margin: 20px auto 0 auto !important;
+    gap: 10px;
   }
-
+  
   #notebook-pages-array a {
-    font-size: 16px; /* */
-    padding: 8px 0; /* */
-    transform: none !important; /* */
-  }
-
-  #close-archive-btn {
-    margin: 20px auto !important; /* Re-centers return element cleanly below text content */
-  }
-
-  /* 7. IMAGE VIEW ENGINE CALIBRATION */
+  color: #1a1a1a;
+  font-size: 20px !important ; /* Adjust this value to make the desktop text larger or smaller */
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+}
+/* ==========================================================================
+     7. IMAGE VIEW ENGINE CALIBRATION (Inside @media (max-width: 768px))
+     ========================================================================== */
   .viewer-header {
-    margin-top: 10px; /* */
+    margin-top: 0px !important; /* */
   }
 
   #viewer-page-title {
-    font-size: 16px; /* */
+    font-size: 16px !important; /* */
   }
 
-  /* Converts row framework to stacked format so drawings expand wide on phones */
+  /* Force the layout row into a single vertical column track */
   .viewer-display-frame {
     flex-direction: column !important; /* */
-    gap: 15px; /* */
+    gap: 20px !important;       /* Clean breathing space between the canvas and the buttons */
     padding: 0; /* */
+    width: 100% !important;     /* FIXED: Unlocks the flex container */
   }
 
+  /* The link wrapper now stretches to allow maximum horizontal expansion */
   #viewer-main-link {
-    max-width: 95% !important; /* */
-    order: 1; /* Locks image view element strictly on top */
+    width: 100% !important;
+    max-width: 95% !important;  /* Spans nearly edge-to-edge on a phone screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 1;                   /* Guarantees the drawing stays locked at the top of the stack */
   }
 
+  /* The image now fills its link container width, expanding dramatically */
   #viewer-main-image {
-    max-height: 45vh; /* */
+    width: 100% !important;     /* Spreads out fully to meet the 95% container boundary */
+    height: auto !important;    /* Keeps your fine line art aspect ratios perfect */
+    max-height: 55vh !important;/* Bumps up vertical tracking space */
+    object-fit: contain;
   }
 
-  /* Positions navigation arrows underneath drawing canvas horizontally side-by-side */
+  /* Sets up the navigation arrows side-by-side directly beneath the canvas */
   .arrow-btn {
-    order: 2; /* */
-    padding: 5px 25px; /* */
-    display: inline-flex; /* */
+    order: 2;                   /* Drops the inputs below the artwork view */
+    padding: 10px 30px !important;
+    display: inline-flex;       /* Allows them to sit next to each other in a clean control line */
   }
 
   .arrow-btn img {
-    width: 32px !important; /* Overrides the broken desktop 20% width feedback calculation loop */
+    width: 36px !important;     /* Bumps up the size slightly so it's a perfect thumb hit-target */
+    height: auto !important;
   }
 
   .viewer-associated-tray {
     flex-direction: column; /* */
     gap: 6px; /* */
-    margin-top: 10px; /* */
+    margin-top: 15px !important;
   }
 
   #viewer-associated-links {
@@ -851,6 +955,91 @@ html {
     font-size: 16px; /* */
     line-height: 1.5; /* */
   }
+
+  /* ==========================================================================
+     7. FLUID MOBILE VIEWER (Stretching Background & Direct Image Border)
+     ========================================================================== */
+
+  /* 1. UNLOCK THE MASTER CONTAINER (Allows tape-paper to stretch) */
+  .viewer-engaged .Notebooks {
+    /* FIXED: Kills the strict height lock so the container grows with the content */
+    height: auto !important; 
+    min-height: 85vh !important;
+    padding-bottom: 40px !important;
+    
+    /* FIXED: Forces the tape-paper graphic to stretch to the new absolute height */
+    background-size: 100% 100% !important; 
+  }
+  
+  /* 2. KILL THE NESTED SCROLL */
+  #image-viewer-stage:not(.hidden) {
+    height: auto !important; 
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    
+    /* FIXED: Entirely eradicates internal scrollbars */
+    overflow: visible !important; 
+  }
+
+  /* 3. STRIP THE FRAME & RETAIN GRID FOR ARROWS */
+  .viewer-display-frame {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 15px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    
+    /* FIXED: Completely strips any residual background, border, or shadow from the frame */
+    background: none !important; 
+    border: none !important;     
+    box-shadow: none !important; 
+  }
+
+  /* 4. FLUID IMAGE DIMENSIONS WITH DIRECT BORDER */
+  #viewer-main-link {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Removes the restricted height lock from the previous step */
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #viewer-main-image {
+    width: 100% !important;
+    
+    /* FIXED: Allows the image to expand fully on its Y-axis without restriction */
+    height: auto !important; 
+    max-height: none !important; 
+    object-fit: contain !important;
+    
+    /* FIXED: Places a sharp 1px border strictly around the physical edges of the scan */
+    border: 1px solid #000000 !important;
+    margin-left: 20px !important; /* Adds a small buffer on the left so the border doesn't clip into the image */
+  }
+
+  /* 5. ARROW BUTTON PLACEMENT */
+  #viewer-prev-btn {
+    grid-column: 1 !important;
+    justify-self: end !important;
+    padding: 5px 20px !important;
+  }
+
+  #viewer-next-btn {
+    grid-column: 2 !important;
+    justify-self: start !important;
+    padding: 5px 20px !important;
+  }
+
+  .arrow-btn img {
+    width: 36px !important;
+    height: auto !important;
+  }
 }
 
 /* ==========================================================================
@@ -858,8 +1047,8 @@ html {
    ========================================================================== */
 @media (max-width: 480px) {
   #landingLogo {
-    width: 20%; /* */
-    height: 15%; /* */
+    width: 90%; /* */
+    height: auto !important; /* */
   }
 
   /* Wipes view counter completely off the layout on tight smartphone screens */
@@ -872,6 +1061,20 @@ html {
   .archive-engaged .Notebooks {
     margin: 380px auto 0 auto !important;
   }
+  /* 8. ABOUT CONTENT SHIFT (Inside @media (max-width: 768px)) */
+  .About {
+    position: relative !important; 
+    top: auto !important; 
+    margin-top: 12vh !important; 
+    padding-bottom: 5px !important; 
+  }
+
+  .About .about-header {
+    height: auto !important;
+    width: 35% !important;       /* FIXED: Bumps the size up to command the narrow phone screen */
+    margin-top: 4vh !important;
+  }
+
 }
 
 /* Global Shared Keyframes */

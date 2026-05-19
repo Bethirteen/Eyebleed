@@ -50,6 +50,9 @@ continueButton.addEventListener("click", () => {
   bgMusic.play().catch((err) => console.error("Audio playback failure:", err));
   UIButtonClickSound.currentTime = 0;
   UIButtonClickSound.play().catch(() => {});
+
+  // NEW: Force the layout engine to calculate exact skeleton positions upon entry
+  setTimeout(() => window.dispatchEvent(new Event("scroll")), 50);
 });
 
 // Runtime Audio Switch Event Handler
@@ -64,44 +67,62 @@ musicToggle.addEventListener("click", () => {
     UIButtonClickSound.play().catch(() => {});
   }
 });
-// SCROLL BOUNDARY ENGINE: Seamlessly pins the skeleton controller above the About section
-window.addEventListener("scroll", () => {
+// ==========================================================================
+// KINETIC TRACKING ENGINE (Continuous Frame Sync for Emulators & Mobile)
+// ==========================================================================
+function startSkeletonEngine() {
   const mainView = document.getElementById("main-view");
   const musicController = document.getElementById("music-toggle");
   const aboutSection = document.getElementById("about");
 
-  // Safety check: Exit immediately if the main view is still hidden
-  if (
-    !mainView ||
-    mainView.classList.contains("hidden") ||
-    !musicController ||
-    !aboutSection
-  )
-    return;
+  function syncFrame() {
+    // 1. Wait for the main view to become active before calculating geometry
+    if (
+      !mainView ||
+      mainView.classList.contains("hidden") ||
+      !musicController ||
+      !aboutSection
+    ) {
+      requestAnimationFrame(syncFrame);
+      return;
+    }
 
-  const aboutRect = aboutSection.getBoundingClientRect();
-  const isTablet = window.innerWidth <= 1024;
-  const offset = isTablet ? 20 : 30;
+    const aboutRect = aboutSection.getBoundingClientRect();
+    const isTablet = window.innerWidth <= 1024;
+    const offset = isTablet ? 20 : 30;
+    
+    // Fallback metric in case the emulator returns a 0 height during a transition
+    const controllerHeight = musicController.offsetHeight || (isTablet ? 65 : 120);
 
-  // FIX: Use explicit style heights if the browser returns 0 before fully rendering the asset
-  const controllerHeight =
-    musicController.offsetHeight || (isTablet ? 65 : 120);
+    // 2. Hardware-level coordinate read: Bypasses all scroll event listeners
+    if (aboutRect.top <= window.innerHeight) {
+      musicController.style.position = "absolute";
 
-  // Trigger the exact frame the About section edge enters the bottom threshold of the viewport
-  if (aboutRect.top <= window.innerHeight) {
-    musicController.style.position = "absolute";
+      // Safely pull the document scroll depth across all emulator layout traps
+      const currentScrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      
+      // Calculate the absolute baseline and lock the skeleton right above it
+      const absoluteTop = currentScrollY + aboutRect.top;
+      musicController.style.top = `${absoluteTop - offset - controllerHeight}px`;
+      musicController.style.bottom = "auto";
+    } else {
+      // Restore default viewport pinning
+      musicController.style.position = "fixed";
+      musicController.style.top = "auto";
+      musicController.style.bottom = `${offset}px`;
+    }
 
-    // Calculates the precise absolute document coordinate to eliminate any layout snapping
-    const aboutTopOnPage = window.scrollY + aboutRect.top;
-    musicController.style.top = `${aboutTopOnPage - offset - controllerHeight}px`;
-    musicController.style.bottom = "auto";
-  } else {
-    // Seamlessly restores default fixed viewport-tracking when scrolling back up
-    musicController.style.position = "fixed";
-    musicController.style.top = "auto";
-    musicController.style.bottom = `${offset}px`;
+    // 3. Keep the engine spinning endlessly alongside the browser's render pipeline
+    requestAnimationFrame(syncFrame);
   }
-});
+
+  // Ignite the loop
+  syncFrame();
+}
+
+// Fire the engine the moment the document object model is constructed
+document.addEventListener("DOMContentLoaded", startSkeletonEngine);
+
 const customCursor = document.getElementById("custom-cursor");
 let mouseX = 0;
 let mouseY = 0;
@@ -362,7 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (pages.length === 0) { //
       pagesArrayContainer.innerHTML =
-        "<p style='color:#1a1a1a; font-style:italic;'>Volume details currently vacant...</p>"; //
+        " "; //
     } else { //
       // Build out the minimalist text line structure
       pages.forEach((page) => { //
