@@ -1074,7 +1074,9 @@ html {
     width: 35% !important;       /* FIXED: Bumps the size up to command the narrow phone screen */
     margin-top: 4vh !important;
   }
-
+#custom-cursor {
+    display: none !important;
+  }
 }
 
 /* Global Shared Keyframes */
