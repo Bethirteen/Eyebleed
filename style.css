@@ -100,6 +100,7 @@ body {
   border-radius: 0;
   border: 1px solid #000;
   background-color: #fff;
+  color: #000;
 }
 #continue:hover {
   background-color: #f0f0f0;
@@ -708,7 +709,7 @@ html {
     padding: 10px; /* */
   }
   #quote {
-    font-size: 16px !important; /* */
+    font-size: 18px !important; /* */
   }
 
   /* 2. NAVBAR RE-ARCHITECTURE: Collapse to flat menu list */
@@ -841,7 +842,7 @@ html {
     grid-template-rows: auto; /* */
     height: auto; /* */
     gap: 30px; /* */
-    margin: 30px auto 0 auto; /* */
+    margin: -20px auto 0 auto; /* */
   }
 
   .notebook-links-grid a {
@@ -1076,6 +1077,9 @@ html {
   }
 #custom-cursor {
     display: none !important;
+  }
+  #quote {
+    font-size: 16px !important; /* */
   }
 }
 
