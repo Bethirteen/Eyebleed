@@ -233,30 +233,31 @@ const notebookCatalog = {
       description: "Danny the Dancer, 23, haunted by his thoughts"
     },
     {
-      title: "Page 02: Intimacy",
-      img: "Assets/Notebook_00/page2.png",
+      title: "Page 02: Observer's curse",
+      img: "Assets/Notebook_00/page2.jpeg",
       associated: ["Page 05", "Page 07", "Page 10"],
-      description: "A study on structural proximity and boundary deterioration. The hatching lines bleed deliberately into the margins."
+      description: "A collection of sketches by the observer, training their hand."
     },
     {
-      title: "Page 03: Mythology and culture",
-      img: "Assets/Notebook_00/page3.png",
+      title: "Page 03: Time's Mockery",
+      img: "Assets/Notebook_00/page3.jpeg",
+      description: "Hubert Langley, 36, being watched by Lisa Rowe, 23."
     },
     {
-      title: "Page 05: Decay Manifestation",
-      img: "Assets/Notebook_00/page5.png",
+      title: "Page 05: Unending Game",
+      img: "Assets/Notebook_00/page5.jpeg",
     },
     {
       title: "Page 06: Solitude Specimen",
-      img: "Assets/Notebook_00/page6.png",
+      img: "Assets/Notebook_00/page6.jpeg",
     },
     {
       title: "Page 07: Observation Trauma",
-      img: "Assets/Notebook_00/page7.png",
+      img: "Assets/Notebook_00/page7.jpeg",
     },
     {
       title: "Page 08: Final Notebook Core",
-      img: "Assets/Notebook_00/page8.png",
+      img: "Assets/Notebook_00/page8.jpeg",
     },
     {
       title: "Page 09: Striated Muscle Tension",

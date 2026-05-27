@@ -712,83 +712,74 @@ html {
     font-size: 18px !important; /* */
   }
 
-  /* 2. NAVBAR RE-ARCHITECTURE: Collapse to flat menu list */
+  /* ==========================================================================
+     2. NAVBAR RE-ARCHITECTURE: Compact Wrap Menu (Inside @media (max-width: 768px))
+     ========================================================================== */
   nav {
-    display: flex !important; /* Overrides desktop grid metrics entirely for clean stacking */
-    flex-direction: column; /* */
-    height: auto !important; /* */
-    background-color: #000000; /* */
-    padding-left: 0; /* */
+    display: flex !important; 
+    flex-direction: row !important; /* Switches from vertical stack to horizontal wrap */
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: auto !important; 
+    background-color: #000000; 
+    padding: 15px 0 10px 0 !important; 
   }
 
   nav a.logo-link {
-    margin: 15px 0; /* */
-    text-align: center; /* */
+    width: 100% !important; 
+    margin: 0 0 10px 0 !important; 
+    
+    /* FIXED: Converts the link into a structural container and hard-centers the image inside it */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
   nav img {
-    height: 95px; /* */
-    width: auto; /* */
-    margin-right: 0; /* */
-    top: 0; /* */
-    image-rendering: pixelated; /* */
+    height: 70px !important; /* Drastically shrunk from 95px */
+    margin: 0 !important; 
   }
 
-  /* Converts grid links into solid, wide stack menu rows */
+  /* Converts the massive block rows into tight, side-by-side inline links */
   nav a {
-    width: 100% !important; /* */
-    height: 50px !important; /* */
-    font-size: 16px; /* */
-    border-right: none !important; /* */
-    border-bottom: 2px solid #222222; /* */
+    width: auto !important; 
+    height: auto !important; 
+    font-size: 15px !important; 
+    border: none !important; 
+    padding: 5px 10px !important; 
   }
 
-  nav a.logo-link + a {
-    border-left: none !important; /* */
-  }
-
-  /* Pulls portfolio logo out of grid syntax and positions it at the bottom of the stack */
   nav a.portfolio-link {
-    grid-column: auto !important; /* */
-    justify-self: center !important; /* */
-    padding: 15px 0 !important; /* */
-    border-bottom: none !important; /* */
+    padding: 5px 10px !important; 
   }
 
   nav a.portfolio-link img {
-    height: 60px; /* */
-    width: auto; /* */
-    position: static; /* */
-    margin: 0; /* */
+    height: 55px !important; /* Scales the portfolio GIF down to match the text height */
   }
 
-  /* 3. WITNESS SCOREBOARD RE-ALIGNMENT (Remains operational on wider mobile/tablet viewports) */
+  /* ==========================================================================
+     3. WITNESS SCOREBOARD RE-ALIGNMENT
+     ========================================================================== */
   .Viewcounter {
     display: flex !important;
-    top: 365px; /* */
-  }
-
-  .Viewcounter img:first-child {
-    height: 55px; /* */
-    margin-right: 6px; /* */
-  }
-
-  .Viewcounter img:not(:first-child) {
-    height: 26px; /* */
+    
+    /* FIXED: Pulled up massively from 365px to sit right under the new nav */
+    top: 135px !important; 
   }
 
 /* ==========================================================================
      4. THE MAIN WORKSPACE & TAPE-PAPER FRAMING (Inside @media (max-width: 768px))
      ========================================================================== */
   .Notebooks {
-    margin: 470px auto 0 auto !important;
+    margin: 230px auto 0 auto !important;
     height: 75vh !important; /* Locks the default view so the paper never stretches vertically */
     min-height: auto !important;
     padding: 20px 10px !important;
   }
 
   .archive-engaged .Notebooks {
-    margin: 470px auto 0 auto !important;
+    margin: 230px auto 0 auto !important;
     
     /* FIXED: Re-locks the container height so the tape-paper background stays perfectly proportioned */
     height: 80vh !important; 
@@ -797,7 +788,7 @@ html {
   }
   /* 1. CONTAINER BOUNDARY LOCK */
   .viewer-engaged .Notebooks {
-    margin: 470px auto 0 auto !important;
+    margin: 230px auto 0 auto !important;
     
     /* FIXED: Re-locks the height to stop the tape-paper from stretching */
     height: 85vh !important; 
@@ -1060,7 +1051,7 @@ html {
   /* Snaps workspace card safely upward right below navigation column floor */
   .Notebooks,
   .archive-engaged .Notebooks {
-    margin: 380px auto 0 auto !important;
+    margin: 230px auto 0 auto !important;
   }
   /* 8. ABOUT CONTENT SHIFT (Inside @media (max-width: 768px)) */
   .About {
@@ -1529,3 +1520,65 @@ html {
 #viewer-main-link:hover #viewer-main-image {
   animation: 1s jitter infinite;
 }
+/* ==========================================================================
+     MOBILE LANDSCAPE LOCKOUT ENGINE
+     ========================================================================== */
+     
+  /* 1. DEFAULT HIDDEN STATE */
+  #landscape-warning {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    
+    /* CRT Scanline Overlay Layer Replication */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25) 50%, transparent 50%);
+    background-size: 100% 4px;
+    
+    color: rgb(243, 241, 235); /* Soft white to match your nav links */
+    z-index: 999999; /* Absolute highest layer possible */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  #landscape-warning h2 {
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: #ff3333; /* Crimson bleed accent */
+    text-shadow: 0 0 10px rgba(255, 51, 51, 0.8);
+  }
+
+  #landscape-warning p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 5px 0;
+  }
+
+  /* 2. THE TRIGGER: Activates on screens smaller than a desktop monitor held sideways */
+  @media (max-width: 950px) and (orientation: landscape) {
+    
+    /* Kills absolutely every element on your website EXCEPT the warning screen */
+    body > *:not(#landscape-warning) {
+      display: none !important; 
+    }
+    
+    /* Forces the blackout screen to render */
+    #landscape-warning {
+      display: flex !important; 
+    }
+    
+    /* Hard-locks the viewport so they cannot scroll the black screen */
+    body {
+      overflow: hidden !important; 
+      background-image: none !important; 
+      background-color: #000000 !important;
+    }
+  }
