@@ -227,16 +227,16 @@ document.addEventListener("DOMContentLoaded", initializeOdometer);
 const notebookCatalog = {
   "00": [
     {
-      title: "Page 01: Night Prince",
+      title: "Page 01: A Dancer's Tale",
       img: "Assets/Notebook_00/page1.jpeg",
-      associated: ["Page 02", "Page 05", "Page 21"], // Explicitly curated connections
-      description: "Danny the Dancer, 23, haunted by his thoughts"
+      associated: ["Page 13"], // Explicitly curated connections
+      description: "Danny the Dancer, 23, tempted by a child of Her"
     },
     {
-      title: "Page 02: Observer's curse",
+      title: "Page 02: The Prophet's End",
       img: "Assets/Notebook_00/page2.jpeg",
-      associated: ["Page 05", "Page 07", "Page 10"],
-      description: "A collection of sketches by the observer, training their hand."
+      associated: ["Page 13", "Page 11",], // Explicitly curated connections
+      description: "Prophet Henry.H, 26, bleeding on the cross"
     },
     {
       title: "Page 03: Time's Mockery",
@@ -246,76 +246,80 @@ const notebookCatalog = {
     {
       title: "Page 05: Unending Game",
       img: "Assets/Notebook_00/page5.jpeg",
+      description: "A mundane couple, passionately playing tennis"
     },
     {
-      title: "Page 06: Solitude Specimen",
+      title: "Page 06: Unrecovered",
       img: "Assets/Notebook_00/page6.jpeg",
     },
     {
-      title: "Page 07: Observation Trauma",
-      img: "Assets/Notebook_00/page7.jpeg",
-    },
-    {
-      title: "Page 08: Final Notebook Core",
+      title: "Page 08: Unrecovered",
       img: "Assets/Notebook_00/page8.jpeg",
     },
     {
-      title: "Page 09: Striated Muscle Tension",
-      img: "Assets/Notebook_00/page9.png",
+      title: "Page 09: Unrecovered",
+      img: "Assets/Notebook_00/page9.jpeg",
     },
     {
-      title: "Page 10: Mid-Century Fracture Reference",
-      img: "Assets/Notebook_00/page10.png",
+      title: "Page 10: Unrecovered",
+      img: "Assets/Notebook_00/page10.jpeg",
     },
     {
-      title: "Page 11: Cellular Distortion Phase",
-      img: "Assets/Notebook_00/page11.png",
+      title: "Page 11: War Crimes",
+      img: "Assets/Notebook_00/page11.jpeg",
+      associated: ["Page 02"], // Explicitly curated connections
+      description: "Ezekiel Ried, 32, awaiting execution in his home following the Prophet Henry.H, 24's death"
     },
     {
-      title: "Page 12: Dissected Void Map",
-      img: "Assets/Notebook_00/page12.png",
+      title: "Page 12: Unrecovered",
+      img: "Assets/Notebook_00/page12.jpeg",
     },
     {
-      title: "Page 13: Corrupted Tissue Outline",
-      img: "Assets/Notebook_00/page13.png",
+      title: "Page 13: Genesis",
+      img: "Assets/Notebook_00/page13.jpeg", 
+      description: "The creation story according to the Prophet Henry.H, 24, depicting Her and It"
     },
     {
-      title: "Page 14: Cognitive Bleed Analysis",
-      img: "Assets/Notebook_00/page14.png",
+      title: "Page 14: The Hope's Diner Murder",
+      img: "Assets/Notebook_00/page14.jpeg",
+      associated: ["Page 13", "Page 19"], // Explicitly curated connections
+      description: "Illustration of events surrounding the Hope's Diner murder, depicting a child of Her in the center"
     },
     {
-      title: "Page 15: Fossilized Sinew Sketch",
-      img: "Assets/Notebook_00/page15.png",
+      title: "Page 15: Unrecovered",
+      img: "Assets/Notebook_00/page15.jpeg",
     },
     {
-      title: "Page 16: Subdermal Texture Index",
-      img: "Assets/Notebook_00/page16.png",
+      title: "Page 16: Unrecovered",
+      img: "Assets/Notebook_00/page16.jpeg",
     },
     {
-      title: "Page 17: Abdominal Cavity Shadow",
-      img: "Assets/Notebook_00/page17.png",
+      title: "Page 17: Unrecovered",
+      img: "Assets/Notebook_00/page17.jpeg",
     },
     {
-      title: "Page 18: Post-Mortem Geometry",
-      img: "Assets/Notebook_00/page18.png",
+      title: "Page 18: Unrecovered",
+      img: "Assets/Notebook_00/page18.jpeg",
     },
     {
-      title: "Page 19: Respiratory Tracing Glitch",
-      img: "Assets/Notebook_00/page19.png",
+      title: "Page 19: The Daily Crimes #5",
+      img: "Assets/Notebook_00/page19.jpeg",
+      associated: ["Page 14"], // Explicitly curated connections
+      description: "Issue 5, of the Daily Crimes, covering the Hope's Diner murder"
     },
     {
-      title: "Page 20: Absolute Reality Severance",
-      img: "Assets/Notebook_00/page20.png",
+      title: "Page 20: Unrecovered",
+      img: "Assets/Notebook_00/page20.jpeg",
     },
   ],
   "01": [
     {
-      title: "Page 21: Visceral Ink Pass",
-      img: "Assets/Notebook_01/page1.png",
+      title: "Page 21: Unrecovered",
+      img: "Assets/Notebook_01/page21.jpeg",
     },
     {
-      title: "Page 22: Observed Reality Deficit",
-      img: "Assets/Notebook_01/page2.png",
+      title: "Page 22: Unrecovered",
+      img: "Assets/Notebook_01/page22.jpeg",
     },
   ],
   "02": [], // Add entry dictionaries here as you expand your digital archives
